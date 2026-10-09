@@ -1,5 +1,6 @@
 'use client'
 
+import { skipToken, useQuery } from '@tanstack/react-query'
 import { Edit3, Link2, LogOutIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -15,10 +16,17 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Spinner } from '@/components/ui/spinner'
 import { signOut, useSession } from '@/lib/auth/client'
+import { client } from '@/lib/orpc/client'
 
 export function AuthMenu() {
 	const router = useRouter()
 	const { data: session, isPending } = useSession()
+	const { data: userName } = useQuery(
+		client.career.getUserName.queryOptions({
+			input: session?.user ? undefined : skipToken,
+		})
+	)
+	const username = userName?.username
 
 	if (isPending) {
 		return (
@@ -61,7 +69,11 @@ export function AuthMenu() {
 			/>
 			<DropdownMenuContent align="end">
 				<DropdownMenuGroup>
-					<DropdownMenuItem nativeButton={false} render={<Link href="/" />}>
+					<DropdownMenuItem
+						nativeButton={false}
+						disabled={!username}
+						render={<Link href={username ? `/${username}` : '/edit'} />}
+					>
 						<Link2 />
 						Preview
 					</DropdownMenuItem>

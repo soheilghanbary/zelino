@@ -30,6 +30,26 @@ export function AboutFormSkeleton() {
 						<Skeleton className="h-9 w-full" />
 					</div>
 
+					<div className="flex flex-col gap-3">
+						<Skeleton className="h-4 w-20" />
+						<Skeleton className="h-9 w-full" />
+					</div>
+
+					<div className="flex flex-col gap-3">
+						<Skeleton className="h-4 w-14" />
+						<Skeleton className="h-9 w-full" />
+					</div>
+
+					<div className="flex flex-col gap-3">
+						<Skeleton className="h-4 w-16" />
+						<Skeleton className="h-9 w-full" />
+					</div>
+
+					<div className="flex flex-col gap-3">
+						<Skeleton className="h-4 w-20" />
+						<Skeleton className="h-9 w-full" />
+					</div>
+
 					<div className="flex flex-col gap-3 sm:col-span-2">
 						<div className="flex items-baseline justify-between gap-2">
 							<Skeleton className="h-4 w-28" />

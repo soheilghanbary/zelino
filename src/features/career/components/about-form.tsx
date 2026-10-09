@@ -1,10 +1,8 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { UploadIcon } from 'lucide-react'
 import { Controller, useForm, useWatch } from 'react-hook-form'
 import { toast } from 'sonner'
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
 	Field,
@@ -17,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { client } from '@/lib/orpc/client'
 import { type AboutValues, aboutSchema } from '../schemas'
+import { UploadImage } from './upload-image'
 
 const TAGLINE_MAX = 140
 const SUMMARY_MAX = 600
@@ -27,6 +26,7 @@ export function AboutForm(props: AboutValues) {
 		control,
 		formState: { errors, isDirty },
 		reset,
+		setValue,
 	} = useForm({
 		resolver: zodResolver(aboutSchema),
 		mode: 'onBlur',
@@ -53,6 +53,10 @@ export function AboutForm(props: AboutValues) {
 			title: data.title,
 			tagline: data.tagline,
 			summary: data.summary,
+			location: data.location,
+			phone: data.phone,
+			githubUrl: data.githubUrl,
+			linkedinUrl: data.linkedinUrl,
 		})
 	})
 
@@ -60,30 +64,13 @@ export function AboutForm(props: AboutValues) {
 		<form onSubmit={onSubmit}>
 			<FieldSet disabled={isSaving}>
 				<FieldGroup>
-					<div className="flex flex-wrap items-center gap-4">
-						<Avatar className="size-28">
-							<AvatarImage
-								src={image.length > 0 ? image : '/placeholder.webp'}
-								alt=""
-							/>
-						</Avatar>
-						<div className="grid gap-2">
-							<Button
-								type="button"
-								variant="outline"
-								className="w-fit"
-								onClick={() => document.getElementById('about-image')?.click()}
-								disabled={isSaving}
-							>
-								<UploadIcon />
-								Replace photo
-							</Button>
-							<p className="max-w-xs text-balance text-muted-foreground text-xs/5">
-								Upload a photo of yourself. JPG, PNG, or WebP up to 4MB.
-							</p>
-						</div>
-					</div>
-
+					<UploadImage
+						value={image}
+						disabled={isSaving}
+						onChange={(url) => {
+							setValue('image', url, { shouldDirty: true })
+						}}
+					/>
 					<Controller
 						control={control}
 						name="image"
@@ -129,6 +116,86 @@ export function AboutForm(props: AboutValues) {
 									<Input
 										{...field}
 										id={field.name}
+										aria-invalid={fieldState.invalid}
+										disabled={isSaving}
+									/>
+									<FieldError errors={[fieldState.error]} />
+								</Field>
+							)}
+						/>
+
+						<Controller
+							control={control}
+							name="location"
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor={field.name}>Location</FieldLabel>
+									<Input
+										{...field}
+										id={field.name}
+										autoComplete="address-level2"
+										placeholder="Berlin, Germany"
+										aria-invalid={fieldState.invalid}
+										disabled={isSaving}
+									/>
+									<FieldError errors={[fieldState.error]} />
+								</Field>
+							)}
+						/>
+
+						<Controller
+							control={control}
+							name="phone"
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor={field.name}>Phone</FieldLabel>
+									<Input
+										{...field}
+										id={field.name}
+										type="tel"
+										inputMode="tel"
+										autoComplete="tel"
+										placeholder="+49 30 123456"
+										aria-invalid={fieldState.invalid}
+										disabled={isSaving}
+									/>
+									<FieldError errors={[fieldState.error]} />
+								</Field>
+							)}
+						/>
+
+						<Controller
+							control={control}
+							name="githubUrl"
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor={field.name}>GitHub</FieldLabel>
+									<Input
+										{...field}
+										id={field.name}
+										type="url"
+										inputMode="url"
+										placeholder="github.com/username"
+										aria-invalid={fieldState.invalid}
+										disabled={isSaving}
+									/>
+									<FieldError errors={[fieldState.error]} />
+								</Field>
+							)}
+						/>
+
+						<Controller
+							control={control}
+							name="linkedinUrl"
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor={field.name}>LinkedIn</FieldLabel>
+									<Input
+										{...field}
+										id={field.name}
+										type="url"
+										inputMode="url"
+										placeholder="linkedin.com/in/username"
 										aria-invalid={fieldState.invalid}
 										disabled={isSaving}
 									/>

@@ -16,9 +16,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
 	AboutForm,
 	AboutFormSkeleton,
+	ExperiencesList,
+	ExperiencesSkeleton,
 	SkillsFormSkeleton,
 } from '@/features/career'
 import {
+	getExperiences,
 	getSkills,
 	getUserAbout,
 	getUserName,
@@ -35,6 +38,11 @@ export const AboutTab = async () => {
 export const SkillsTab = async () => {
 	const data = await call(getSkills)
 	return <SkillsForm {...data} />
+}
+
+export const ExperienceTab = async () => {
+	const data = await call(getExperiences)
+	return <ExperiencesList {...data} />
 }
 
 export const UserNameSection = async () => {
@@ -112,9 +120,9 @@ export default function EditPage() {
 						</Suspense>
 					</TabsContent>
 					<TabsContent value="experience">
-						<p className="py-6 text-muted-foreground text-sm/6">
-							Work history lands here.
-						</p>
+						<Suspense fallback={<ExperiencesSkeleton />}>
+							<ExperienceTab />
+						</Suspense>
 					</TabsContent>
 					<TabsContent value="skills">
 						<Suspense fallback={<SkillsFormSkeleton />}>

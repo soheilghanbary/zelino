@@ -1,5 +1,6 @@
 import { eq } from 'drizzle-orm'
 import { db } from '@/lib/db'
+import { parseExperiences } from '@/lib/db/parse'
 import { user } from '@/lib/db/schema'
 import { authed } from '@/lib/orpc/context'
 
@@ -11,6 +12,10 @@ export const getUserAbout = authed.handler(async ({ context }) => {
 			title: user.title,
 			tagline: user.tagline,
 			summary: user.summary,
+			location: user.location,
+			phone: user.phone,
+			githubUrl: user.githubUrl,
+			linkedinUrl: user.linkedinUrl,
 		})
 		.from(user)
 		.where(eq(user.id, context.userId))
@@ -31,4 +36,12 @@ export const getUserName = authed.handler(async ({ context }) => {
 		.from(user)
 		.where(eq(user.id, context.userId))
 	return data
+})
+
+export const getExperiences = authed.handler(async ({ context }) => {
+	const [data] = await db
+		.select({ experiences: user.experiences })
+		.from(user)
+		.where(eq(user.id, context.userId))
+	return { experiences: parseExperiences(data?.experiences) }
 })

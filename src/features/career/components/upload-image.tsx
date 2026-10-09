@@ -1,121 +1,151 @@
 'use client'
-import { UploadIcon, XIcon } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { cn } from 'cn'
+import { UploadIcon } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
+import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import { buttonVariants } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
+import { useSession } from '@/lib/auth/client'
+import { useEdgeStore } from '@/lib/edgestore'
+import {
+	IMAGE_ACCEPT,
+	MAX_IMAGE_BYTES,
+	MAX_IMAGE_LABEL,
+	REJECTION_MESSAGES,
+} from '@/lib/edgestore/config'
+import { client } from '@/lib/orpc/client'
 
-interface UploadImageProps {
-	value?: string | File | null
-	onChange: (file: File | null) => void
+type UploadImageProps = {
+	value: string
+	onChange?: (url: string) => void
 	disabled?: boolean
-	placeholder?: string
-	className?: string
 }
 
-const MAX_FILE_SIZE = 4 * 1024 * 1024
+export function UploadImage({ value, onChange, disabled }: UploadImageProps) {
+	const { data: session } = useSession()
+	const { edgestore, state } = useEdgeStore()
+	const [preview, setPreview] = useState<string | null>(null)
+	const [progress, setProgress] = useState<number | null>(null)
+	const abortRef = useRef<AbortController | null>(null)
 
-export function UploadImage({
-	value,
-	onChange,
-	disabled = false,
-	placeholder = '/placeholder.webp',
-	className,
-}: UploadImageProps) {
-	const [preview, setPreview] = useState(placeholder)
+	const { mutateAsync: updateImage } = useMutation(
+		client.career.updateImage.mutationOptions({
+			onSuccess: (res) => toast.success(res.msg),
+			onError: (error) => toast.error(error.message),
+		})
+	)
 
 	useEffect(() => {
-		if (value instanceof File) {
-			const objectUrl = URL.createObjectURL(value)
-			setPreview(objectUrl)
+		if (value) setPreview(null)
+	}, [value])
 
-			return () => URL.revokeObjectURL(objectUrl)
-		}
+	useEffect(
+		() => () => {
+			if (preview) URL.revokeObjectURL(preview)
+		},
+		[preview]
+	)
 
-		setPreview(value || placeholder)
-	}, [value, placeholder])
+	const isUploading = progress !== null
 
-	const { getRootProps, getInputProps, open, fileRejections, isDragActive } =
-		useDropzone({
-			accept: {
-				'image/jpeg': ['.jpg', '.jpeg'],
-				'image/png': ['.png'],
-				'image/webp': ['.webp'],
-			},
-			maxSize: MAX_FILE_SIZE,
-			multiple: false,
-			disabled,
-			noClick: true,
-			onDropAccepted: ([file]) => {
-				if (file) onChange(file)
-			},
-		})
+	const upload = useCallback(
+		async (file: File) => {
+			const userId = session?.user?.id
+			if (!userId) {
+				toast.error('You need to be signed in to upload a photo')
+				return
+			}
 
-	const error = fileRejections[0]?.errors[0]
+			abortRef.current?.abort()
+			const controller = new AbortController()
+			abortRef.current = controller
 
-	const errorMessage =
-		error?.code === 'file-too-large'
-			? 'Image must be 4MB or smaller.'
-			: error?.code === 'file-invalid-type'
-				? 'Only JPG, PNG, and WebP images are allowed.'
-				: error?.message
+			setPreview(URL.createObjectURL(file))
+			setProgress(0)
+
+			try {
+				const uploaded = await edgestore.publicFiles.upload({
+					file,
+					input: { userId },
+					signal: controller.signal,
+					onProgressChange: setProgress,
+				})
+				await updateImage({ image: uploaded.url })
+				onChange?.(uploaded.url)
+			} catch (error) {
+				if (controller.signal.aborted) return
+				toast.error(error instanceof Error ? error.message : 'Upload failed')
+				setPreview(null)
+			} finally {
+				setProgress(null)
+			}
+		},
+		[edgestore, onChange, session?.user?.id, updateImage]
+	)
+
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+		accept: IMAGE_ACCEPT,
+		maxSize: MAX_IMAGE_BYTES,
+		multiple: false,
+		disabled: disabled || !state.initialized,
+		onDrop(accepted, rejections) {
+			const rejection = rejections[0]
+			if (rejection) {
+				toast.error(
+					REJECTION_MESSAGES[rejection.errors[0]?.code] ??
+						'That file cannot be uploaded'
+				)
+				return
+			}
+			const [file] = accepted
+			if (file) void upload(file)
+		},
+	})
 
 	return (
-		<div className={cn('grid gap-2', className)}>
-			<div
-				{...getRootProps()}
-				className={cn(
-					'flex flex-wrap items-center gap-4 rounded-lg transition-colors',
-					isDragActive && 'rounded-lg bg-accent/50 ring-2 ring-primary/30'
-				)}
-			>
-				<input {...getInputProps()} />
-
-				<Avatar className="size-28">
-					<AvatarImage src={preview} alt="Profile image" />
-					<AvatarFallback>IMG</AvatarFallback>
-				</Avatar>
-
-				<div className="grid gap-2">
-					<div className="flex flex-wrap items-center gap-2">
-						<Button
-							type="button"
-							variant="outline"
-							className="w-fit"
-							onClick={open}
-							disabled={disabled}
-						>
-							<UploadIcon />
-							{isDragActive ? 'Drop image here' : 'Replace photo'}
-						</Button>
-
-						{value && (
-							<Button
-								type="button"
-								variant="ghost"
-								size="icon"
-								aria-label="Remove image"
-								onClick={() => onChange(null)}
-								disabled={disabled}
-							>
-								<XIcon />
-							</Button>
-						)}
-					</div>
-
-					<p className="max-w-xs text-balance text-muted-foreground text-xs/5">
-						{isDragActive
-							? 'Drop your image here to upload.'
-							: 'Upload a photo of yourself. JPG, PNG, or WebP up to 4MB. You can also drag and drop an image here.'}
-					</p>
-
-					{errorMessage && (
-						<p role="alert" className="text-destructive text-sm">
-							{errorMessage}
-						</p>
+		<div className="flex flex-wrap items-center gap-4">
+			<Avatar className="size-28">
+				<AvatarImage
+					src={preview ?? (value.length > 0 ? value : '/placeholder.webp')}
+					alt="Profile photo"
+				/>
+			</Avatar>
+			<div className="grid gap-2">
+				<button
+					{...getRootProps({ role: 'button' })}
+					type="button"
+					className={cn(
+						buttonVariants({ variant: 'outline' }),
+						'w-fit',
+						isDragActive && 'border-ring bg-muted',
+						(isUploading || disabled || !state.initialized) && 'opacity-60'
 					)}
-				</div>
+				>
+					{isUploading ? <Spinner /> : <UploadIcon />}
+					{isUploading ? 'Uploading' : 'Replace photo'}
+				</button>
+				<input {...getInputProps()} />
+				{isUploading && (
+					<div
+						role="progressbar"
+						aria-label="Photo upload progress"
+						aria-valuemax={100}
+						aria-valuemin={0}
+						aria-valuenow={Math.round(progress ?? 0)}
+						className="h-1 w-40 overflow-hidden rounded-full bg-muted"
+					>
+						<div
+							className="h-full rounded-full bg-primary transition-[width] duration-150"
+							style={{ width: `${progress}%` }}
+						/>
+					</div>
+				)}
+				<p className="max-w-xs text-balance text-muted-foreground text-xs/5">
+					Upload a photo of yourself. JPG, PNG, or WebP up to {MAX_IMAGE_LABEL}.
+				</p>
 			</div>
 		</div>
 	)

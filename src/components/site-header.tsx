@@ -6,11 +6,18 @@ import { ModeToggle } from './mode-toggle'
 
 export function SiteHeader() {
 	return (
-		<header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-			<div className="mx-auto flex h-14 w-full max-w-xl items-center gap-4 px-4 md:px-6">
-				<Link href="/" className="flex shrink-0 items-center gap-2 font-medium">
-					<GalleryVerticalEndIcon className="size-4" />
-					<span className="font-medium uppercase">Zelino</span>
+		<header className="p-4">
+			<div className="mx-auto flex w-full max-w-xl items-center gap-2 rounded-full border border-border/60 bg-background/75 p-1 backdrop-blur-xl">
+				<Link
+					href="/"
+					className="group ml-1 flex shrink-0 items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+				>
+					<span className="flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+						<GalleryVerticalEndIcon className="size-4" />
+					</span>
+					<span className="font-heading font-semibold text-sm tracking-tight">
+						Zelino
+					</span>
 				</Link>
 				<div className="ms-auto flex items-center gap-1">
 					<ModeToggle />

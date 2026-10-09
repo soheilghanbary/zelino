@@ -24,13 +24,13 @@ export default function LoginPage() {
 			<div className="relative hidden overflow-hidden bg-muted lg:block">
 				<div
 					aria-hidden="true"
-					className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:32px_32px] opacity-70 [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,#000_35%,transparent_100%)]"
+					className="mask-[radial-gradient(ellipse_75%_75%_at_50%_50%,#000_35%,transparent_100%)] absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-size-[32px_32px] opacity-70"
 				/>
 				<div
 					aria-hidden="true"
 					className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,color-mix(in_oklch,var(--primary)_14%,transparent),transparent_65%)]"
 				/>
-				<div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:8px_8px] opacity-40 [mask-image:radial-gradient(circle_at_50%_50%,#000,transparent_70%)] dark:opacity-25" />
+				<div className="mask-[radial-gradient(circle_at_50%_50%,#000,transparent_70%)] absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-size-[8px_8px] opacity-40 dark:opacity-25" />
 
 				<div className="relative flex h-full flex-col justify-between p-10">
 					<div className="flex items-center gap-3">
