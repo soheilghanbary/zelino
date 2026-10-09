@@ -2,5 +2,5 @@
 import { Toaster } from 'sonner'
 
 export const ToastProvider = () => {
-	return <Toaster />
+	return <Toaster richColors theme="dark" />
 }

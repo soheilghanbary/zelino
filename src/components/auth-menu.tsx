@@ -1,0 +1,84 @@
+'use client'
+
+import { Edit3, Link2, LogOutIcon } from 'lucide-react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Spinner } from '@/components/ui/spinner'
+import { signOut, useSession } from '@/lib/auth/client'
+
+export function AuthMenu() {
+	const router = useRouter()
+	const { data: session, isPending } = useSession()
+
+	if (isPending) {
+		return (
+			<Button size="icon" variant="ghost" disabled aria-label="Loading session">
+				<Spinner />
+			</Button>
+		)
+	}
+
+	if (!session?.user) {
+		return (
+			<Button
+				nativeButton={false}
+				size="sm"
+				variant="outline"
+				render={<Link href="/login" />}
+			>
+				Sign in
+			</Button>
+		)
+	}
+
+	const handleSignOut = async () => {
+		await signOut()
+		router.push('/login')
+		router.refresh()
+	}
+
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger
+				render={
+					<Button variant="ghost" size="icon" className="rounded-full">
+						<Avatar>
+							<AvatarImage src={session.user.image!} alt="shadcn" />
+							<AvatarFallback>LR</AvatarFallback>
+						</Avatar>
+					</Button>
+				}
+			/>
+			<DropdownMenuContent align="end">
+				<DropdownMenuGroup>
+					<DropdownMenuItem nativeButton={false} render={<Link href="/" />}>
+						<Link2 />
+						Preview
+					</DropdownMenuItem>
+					<DropdownMenuItem
+						nativeButton={false}
+						render={<Link href={'/edit'} />}
+					>
+						<Edit3 />
+						Edit profile
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+				<DropdownMenuSeparator />
+				<DropdownMenuItem onClick={handleSignOut}>
+					<LogOutIcon />
+					Sign Out
+				</DropdownMenuItem>
+			</DropdownMenuContent>
+		</DropdownMenu>
+	)
+}

@@ -1,11 +1,34 @@
-import { boolean, index, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+import {
+	boolean,
+	index,
+	jsonb,
+	pgTable,
+	text,
+	timestamp,
+} from 'drizzle-orm/pg-core'
+import { nanoid } from 'nanoid'
 
 export const user = pgTable('user', {
 	id: text('id').primaryKey(),
 	name: text('name').notNull(),
-	email: text('email').notNull().unique(),
 	emailVerified: boolean('email_verified').default(false).notNull(),
 	image: text('image'),
+	email: text('email'),
+
+	fullName: text('full_name').notNull().default(''),
+	title: text('job_title').notNull().default(''),
+	tagline: text('tagline').notNull().default(''),
+	summary: text('summary').notNull().default(''),
+	skills: jsonb('skills').$type<any[]>().default([]).notNull(),
+	experiences: jsonb('work_experiences').$type<any[]>().default([]).notNull(),
+	location: text('location').notNull().default(''),
+	githubUrl: text('github_url').notNull().default(''),
+	linkedinUrl: text('linkedin_url').notNull().default(''),
+	portfolio: text('portfolio_url').notNull().default(''),
+	username: text('username')
+		.notNull()
+		.$defaultFn(() => nanoid(8)),
+
 	createdAt: timestamp('created_at').defaultNow().notNull(),
 	updatedAt: timestamp('updated_at')
 		.defaultNow()
