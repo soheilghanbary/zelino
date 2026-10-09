@@ -1,0 +1,88 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"files": {
+		"ignoreUnknown": true
+	},
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"formatter": {
+		"enabled": true,
+		"lineEnding": "lf"
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "asNeeded",
+			"trailingCommas": "es5",
+			"quoteStyle": "single"
+		}
+	},
+	"css": {
+		"linter": {
+			"enabled": true
+		},
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"suspicious": {
+				"preset": "recommended",
+				"noExplicitAny": "off",
+				"noShadowRestrictedNames": "off",
+				"noArrayIndexKey": "off",
+				"noUnknownAtRules": "off",
+				"noAssignInExpressions": "off"
+			},
+			"nursery": {
+				"preset": "recommended",
+				"useSortedClasses": {
+					"fix": "safe",
+					"level": "warn",
+					"options": {
+						"attributes": ["classList"],
+						"functions": ["clsx", "cva", "tv"]
+					}
+				}
+			},
+			"performance": {
+				"preset": "recommended"
+			},
+			"style": {
+				"preset": "recommended",
+				"noNonNullAssertion": "off",
+				"useSelfClosingElements": "off"
+			},
+			"correctness": {
+				"preset": "recommended",
+				"useExhaustiveDependencies": "off",
+				"noNestedComponentDefinitions": "off",
+				"noUnusedImports": {
+					"level": "error",
+					"fix": "safe"
+				},
+				"noUnusedVariables": {
+					"level": "error",
+					"fix": "safe"
+				}
+			},
+			"a11y": {
+				"preset": "recommended",
+				"noSvgWithoutTitle": "off",
+				"useSemanticElements": "off",
+				"useKeyWithClickEvents": "off",
+				"useFocusableInteractive": "off",
+				"noLabelWithoutControl": "off",
+				"useAriaPropsForRole": "off"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "off"
+			}
+		}
+	}
+}
