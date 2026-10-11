@@ -58,8 +58,8 @@
 	--card-foreground: oklch(0.145 0 0);
 	--popover: oklch(1 0 0);
 	--popover-foreground: oklch(0.145 0 0);
-	--primary: oklch(0.491 0.27 292.581);
-	--primary-foreground: oklch(0.969 0.016 293.756);
+	--primary: oklch(0.514 0.222 16.935);
+	--primary-foreground: oklch(0.969 0.015 12.422);
 	--secondary: oklch(0.967 0.001 286.375);
 	--secondary-foreground: oklch(0.21 0.006 285.885);
 	--muted: oklch(0.97 0 0);
@@ -78,8 +78,8 @@
 	--radius: 0.625rem;
 	--sidebar: oklch(0.985 0 0);
 	--sidebar-foreground: oklch(0.145 0 0);
-	--sidebar-primary: oklch(0.541 0.281 293.009);
-	--sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+	--sidebar-primary: oklch(0.586 0.253 17.585);
+	--sidebar-primary-foreground: oklch(0.969 0.015 12.422);
 	--sidebar-accent: oklch(0.97 0 0);
 	--sidebar-accent-foreground: oklch(0.205 0 0);
 	--sidebar-border: oklch(0.922 0 0);
@@ -93,8 +93,8 @@
 	--card-foreground: oklch(0.985 0 0);
 	--popover: oklch(0.205 0 0);
 	--popover-foreground: oklch(0.985 0 0);
-	--primary: oklch(0.432 0.232 292.759);
-	--primary-foreground: oklch(0.969 0.016 293.756);
+	--primary: oklch(0.455 0.188 13.697);
+	--primary-foreground: oklch(0.969 0.015 12.422);
 	--secondary: oklch(0.274 0.006 286.033);
 	--secondary-foreground: oklch(0.985 0 0);
 	--muted: oklch(0.269 0 0);
@@ -110,10 +110,10 @@
 	--chart-3: oklch(0.439 0 0);
 	--chart-4: oklch(0.371 0 0);
 	--chart-5: oklch(0.269 0 0);
-	--sidebar: oklch(0.205 0 0);
+	--sidebar: oklch(0.21 0.006 285.885);
 	--sidebar-foreground: oklch(0.985 0 0);
-	--sidebar-primary: oklch(0.606 0.25 292.717);
-	--sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+	--sidebar-primary: oklch(0.645 0.246 16.439);
+	--sidebar-primary-foreground: oklch(0.969 0.015 12.422);
 	--sidebar-accent: oklch(0.269 0 0);
 	--sidebar-accent-foreground: oklch(0.985 0 0);
 	--sidebar-border: oklch(1 0 0 / 10%);
@@ -122,20 +122,13 @@
 
 @layer base {
 	* {
-		@apply outline-none select-none border-border outline-ring/50;
+		@apply outline-none select-none border-border outline-ring/50 scroll-smooth;
 		-webkit-tap-highlight-color: transparent;
 		-webkit-touch-callout: none;
 	}
 	html {
 		@apply font-sans;
 		overflow-x: clip;
-	}
-	/* Anchor links land under the sticky header; scroll-mt handles the offset,
-	   this only makes the jump readable instead of a teleport. */
-	@media (prefers-reduced-motion: no-preference) {
-		html {
-			scroll-behavior: smooth;
-		}
 	}
 	body {
 		position: relative;

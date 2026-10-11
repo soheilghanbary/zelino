@@ -3,7 +3,6 @@ import { useMutation } from '@tanstack/react-query'
 import { BriefcaseIcon, PencilIcon, PlusIcon, TrashIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
 	Dialog,
@@ -31,6 +30,7 @@ import {
 	ItemTitle,
 } from '@/components/ui/item'
 import { Spinner } from '@/components/ui/spinner'
+import { toast } from '@/components/ui/toast'
 import { client } from '@/lib/orpc/client'
 import {
 	EXPERIENCES_MAX,
@@ -80,7 +80,10 @@ export function ExperiencesList({ experiences }: Props) {
 		setDeletingId(id)
 		try {
 			await remove({ id })
-			toast.success('Experience removed')
+			toast.add({
+				title: 'Removed',
+				description: 'Experience removed',
+			})
 			router.refresh()
 		} finally {
 			setDeletingId(null)

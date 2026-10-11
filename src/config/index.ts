@@ -1,6 +1,6 @@
 export const appConfig = {
-	name: 'Next Stack',
-	title: 'Next Stack',
+	name: 'Zelino',
+	title: 'Zelino',
 	version: '1.0',
-	description: 'Full-Stack starter',
+	description: 'One link for your whole career.',
 }

@@ -66,6 +66,8 @@ export default async function UserPage({ params }: Props) {
 	const sections = getProfileSections(profile)
 
 	return (
+		// Anchor jumps are eased rather than teleported; `motion-safe` keeps
+		// this off for readers who asked for reduced motion.
 		<div className="relative isolate min-h-svh">
 			<div
 				aria-hidden="true"
@@ -76,7 +78,7 @@ export default async function UserPage({ params }: Props) {
 				className="mask-[radial-gradient(ellipse_70%_60%_at_50%_0%,#000_20%,transparent_100%)] pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-size-[32px_32px] opacity-60 dark:opacity-30"
 			/>
 
-			<SiteHeader className="max-w-5xl" />
+			<SiteHeader />
 
 			<main className="mx-auto w-full max-w-5xl px-4 pb-24 md:px-6 md:pt-6">
 				<div className="grid gap-12 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-16">

@@ -4,7 +4,6 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import type { PropsWithChildren } from 'react'
 import { EdgeStoreProvider } from '@/lib/edgestore'
 import { QueryProvider } from './query-provider'
-import { ToastProvider } from './toast-provider'
 
 export default function Providers({ children }: PropsWithChildren) {
 	return (
@@ -17,7 +16,6 @@ export default function Providers({ children }: PropsWithChildren) {
 						defaultTheme="light"
 					>
 						{children}
-						<ToastProvider />
 					</ThemeProvider>
 				</QueryProvider>
 			</NuqsAdapter>

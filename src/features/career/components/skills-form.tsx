@@ -6,9 +6,9 @@ import { Save } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { toast } from '@/components/ui/toast'
 import { client } from '@/lib/orpc/client'
 import { type SkillsValues, skillsSchema } from '../schemas'
 
@@ -29,7 +29,11 @@ export function SkillsForm({ skills }: SkillsValues) {
 	const { mutateAsync, isPending } = useMutation(
 		client.career.updateSkills.mutationOptions({
 			onSuccess(res) {
-				toast(res.msg)
+				toast.add({
+					title: 'Saved',
+					type: 'success',
+					description: res.msg,
+				})
 				router.refresh()
 			},
 		})
@@ -64,6 +68,13 @@ export function SkillsForm({ skills }: SkillsValues) {
 								}}
 								activeTagIndex={activeTagIndex}
 								setActiveTagIndex={setActiveTagIndex}
+								styleClasses={{
+									tag: {
+										body: 'pl-2',
+										closeButton: 'px-1',
+									},
+									input: 'shadow-none',
+								}}
 								{...field}
 							/>
 						)}

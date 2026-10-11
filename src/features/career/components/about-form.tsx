@@ -2,7 +2,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { Controller, useForm, useWatch } from 'react-hook-form'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
 	Field,
@@ -16,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
+import { toast } from '@/components/ui/toast'
 import { client } from '@/lib/orpc/client'
 import { type AboutValues, aboutSchema } from '../schemas'
 import { UploadImage } from './upload-image'
@@ -41,7 +41,11 @@ export function AboutForm(props: AboutValues) {
 	const { mutate, isPending } = useMutation(
 		client.career.updateAbout.mutationOptions({
 			onSuccess(res) {
-				toast.success(res.msg)
+				toast.add({
+					title: 'Saved',
+					type: 'success',
+					description: res.msg,
+				})
 			},
 		})
 	)

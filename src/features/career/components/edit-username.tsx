@@ -5,7 +5,6 @@ import { Edit3Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import {
@@ -24,6 +23,7 @@ import {
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
+import { toast } from '@/components/ui/toast'
 import { client } from '@/lib/orpc/client'
 
 type Props = {
@@ -56,7 +56,11 @@ export function EditUsername({ value }: Props) {
 				reset()
 			},
 			onError(err) {
-				toast.error(err.message)
+				toast.add({
+					title: 'Error',
+					type: 'error',
+					description: err.message,
+				})
 			},
 		})
 	)

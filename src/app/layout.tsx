@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
 import Providers from '@/components/providers'
+import { Toaster } from '@/components/ui/toast'
 import { appConfig } from '@/config'
 
 const font = Inter({
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${font.className} ${headingFont.variable} antialiased`}>
 				<Providers>{children}</Providers>
+				<Toaster />
 			</body>
 		</html>
 	)

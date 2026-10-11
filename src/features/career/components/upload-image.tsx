@@ -4,10 +4,10 @@ import { cn } from 'cn'
 import { UploadIcon } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { toast } from 'sonner'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { buttonVariants } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
+import { toast } from '@/components/ui/toast'
 import { useSession } from '@/lib/auth/client'
 import { useEdgeStore } from '@/lib/edgestore'
 import {
@@ -33,8 +33,14 @@ export function UploadImage({ value, onChange, disabled }: UploadImageProps) {
 
 	const { mutateAsync: updateImage } = useMutation(
 		client.career.updateImage.mutationOptions({
-			onSuccess: (res) => toast.success(res.msg),
-			onError: (error) => toast.error(error.message),
+			onSuccess: (res) =>
+				toast.add({ title: 'Saved', type: 'success', description: res.msg }),
+			onError: (error) =>
+				toast.add({
+					title: 'Error',
+					type: 'error',
+					description: error.message,
+				}),
 		})
 	)
 
@@ -55,7 +61,11 @@ export function UploadImage({ value, onChange, disabled }: UploadImageProps) {
 		async (file: File) => {
 			const userId = session?.user?.id
 			if (!userId) {
-				toast.error('You need to be signed in to upload a photo')
+				toast.add({
+					title: 'Error',
+					type: 'error',
+					description: 'You need to be signed in to upload a photo',
+				})
 				return
 			}
 
@@ -77,7 +87,11 @@ export function UploadImage({ value, onChange, disabled }: UploadImageProps) {
 				onChange?.(uploaded.url)
 			} catch (error) {
 				if (controller.signal.aborted) return
-				toast.error(error instanceof Error ? error.message : 'Upload failed')
+				toast.add({
+					title: 'Error',
+					type: 'error',
+					description: error instanceof Error ? error.message : 'Upload failed',
+				})
 				setPreview(null)
 			} finally {
 				setProgress(null)
@@ -94,10 +108,13 @@ export function UploadImage({ value, onChange, disabled }: UploadImageProps) {
 		onDrop(accepted, rejections) {
 			const rejection = rejections[0]
 			if (rejection) {
-				toast.error(
-					REJECTION_MESSAGES[rejection.errors[0]?.code] ??
-						'That file cannot be uploaded'
-				)
+				toast.add({
+					title: 'Error',
+					type: 'error',
+					description:
+						REJECTION_MESSAGES[rejection.errors[0]?.code] ??
+						'That file cannot be uploaded',
+				})
 				return
 			}
 			const [file] = accepted

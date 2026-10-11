@@ -2,9 +2,9 @@
 
 import { Share2Icon } from 'lucide-react'
 import { useCallback, useState } from 'react'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
+import { toast } from '@/components/ui/toast'
 
 type Props = {
 	name: string
@@ -30,9 +30,13 @@ export function ShareButton({ name }: Props) {
 		setPending(true)
 		try {
 			await navigator.clipboard.writeText(url)
-			toast.success('Link copied to clipboard')
+			toast.add({ title: 'Copied', description: 'Link copied to clipboard' })
 		} catch {
-			toast.error('Could not copy the link')
+			toast.add({
+				title: 'Error',
+				type: 'error',
+				description: 'Could not copy link',
+			})
 		} finally {
 			setPending(false)
 		}

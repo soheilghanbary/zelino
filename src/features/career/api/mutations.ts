@@ -28,14 +28,14 @@ export const updateAbout = authed
 	.input(aboutSchema)
 	.handler(async ({ input, context }) => {
 		await db.update(user).set(input).where(eq(user.id, context.userId))
-		return { msg: 'ok' }
+		return { msg: 'User About updated successfully' }
 	})
 
 export const updateSkills = authed
 	.input(skillsSchema)
 	.handler(async ({ input, context }) => {
 		await db.update(user).set(input).where(eq(user.id, context.userId))
-		return { msg: 'ok' }
+		return { msg: 'Skills updated successfully' }
 	})
 
 export const updateUsername = authed
@@ -47,9 +47,11 @@ export const updateUsername = authed
 			.from(user)
 			.where(eq(user.username, input.username))
 		if (row)
-			throw new ORPCError('CONFLICT', { message: 'Username already taken' })
+			throw new ORPCError('CONFLICT', {
+				message: 'This username is already taken',
+			})
 		await db.update(user).set(input).where(eq(user.id, context.userId))
-		return { msg: 'ok' }
+		return { msg: 'Username updated successfully' }
 	})
 
 export const updateImage = authed
@@ -59,7 +61,7 @@ export const updateImage = authed
 			.update(user)
 			.set({ image: input.image })
 			.where(eq(user.id, context.userId))
-		return { msg: 'Photo updated', image: input.image }
+		return { msg: 'Profile photo updated successfully', image: input.image }
 	})
 
 export const addExperience = authed

@@ -3,7 +3,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
 	Field,
@@ -15,6 +14,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { Textarea } from '@/components/ui/textarea'
+import { toast } from '@/components/ui/toast'
 import { client } from '@/lib/orpc/client'
 import {
 	DESCRIPTION_MAX,
@@ -68,10 +68,18 @@ export function ExperienceForm({ experience, onSuccess }: Props) {
 	const onSubmit = handleSubmit(async (data: ExperienceInput) => {
 		if (experience) {
 			await update({ id: experience.id, experience: data })
-			toast.success('Experience updated')
+			toast.add({
+				title: 'Saved',
+				type: 'success',
+				description: 'Experience updated',
+			})
 		} else {
 			await add({ experience: data })
-			toast.success('Experience added')
+			toast.add({
+				title: 'Saved',
+				type: 'success',
+				description: 'Experience added',
+			})
 		}
 		reset()
 		onSuccess()
