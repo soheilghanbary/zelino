@@ -77,7 +77,7 @@ export function ProfileSectionNav({ sections }: Props) {
 						className={cn(
 							'group relative flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors',
 							isActive
-								? 'bg-muted font-medium text-foreground'
+								? 'text-primary'
 								: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
 						)}
 						href={`#${section.id}`}
@@ -98,11 +98,6 @@ export function ProfileSectionNav({ sections }: Props) {
 							)}
 						/>
 						{section.label}
-						{section.count !== undefined && (
-							<span className="ms-auto text-muted-foreground text-xs tabular-nums">
-								{section.count}
-							</span>
-						)}
 					</a>
 				)
 			})}

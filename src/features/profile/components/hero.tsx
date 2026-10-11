@@ -47,7 +47,7 @@ export function ProfileHero({ profile }: Props) {
 					)}
 
 					{profile.tagline && (
-						<p className="max-w-prose text-balance text-pretty text-muted-foreground text-sm/6">
+						<p className="max-w-prose text-pretty text-muted-foreground text-sm/6">
 							{profile.tagline}
 						</p>
 					)}

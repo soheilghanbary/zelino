@@ -1,6 +1,5 @@
 'use client'
 import { cn } from 'cn'
-import { GalleryVerticalEndIcon } from 'lucide-react'
 import Link from 'next/link'
 import { AuthMenu } from './auth-menu'
 import { ModeToggle } from './mode-toggle'
@@ -21,14 +20,9 @@ export function SiteHeader({ className }: Props) {
 			>
 				<Link
 					href="/"
-					className="group ml-1 flex shrink-0 items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+					className="group ml-3 flex shrink-0 items-center gap-2 rounded-full font-bold text-primary"
 				>
-					<span className="flex size-7 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
-						<GalleryVerticalEndIcon className="size-4" />
-					</span>
-					<span className="font-heading font-semibold text-sm tracking-tight">
-						Zelino
-					</span>
+					Zelino
 				</Link>
 				<div className="ms-auto flex items-center gap-1">
 					<ModeToggle />
