@@ -5,6 +5,7 @@ import { Edit3Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import {
@@ -48,17 +49,19 @@ export function EditUsername({ value }: Props) {
 	const username = watch('username')
 
 	const { mutateAsync, isPending } = useMutation(
-		client.career.updateUsername.mutationOptions()
+		client.career.updateUsername.mutationOptions({
+			onSuccess() {
+				router.refresh()
+				setOpen(false)
+				reset()
+			},
+			onError(err) {
+				toast.error(err.message)
+			},
+		})
 	)
 
-	const onSave = handleSubmit(async (data) => {
-		await mutateAsync(data)
-		router.refresh()
-		setOpen(false)
-		reset({
-			username: data.username,
-		})
-	})
+	const onSave = handleSubmit(async (data) => await mutateAsync(data))
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>

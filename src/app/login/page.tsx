@@ -1,9 +1,15 @@
-'use client'
 import { GalleryVerticalEndIcon } from 'lucide-react'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { LoginForm } from '@/features/auth'
+import { getSession } from '@/lib/auth/session'
 
-export default function LoginPage() {
+export const instant = false
+
+export default async function LoginPage() {
+	const session = await getSession()
+	if (session) redirect('/edit')
+
 	return (
 		<div className="grid min-h-svh overflow-x-clip lg:grid-cols-2">
 			<div className="flex flex-col gap-4 p-6 md:p-10">

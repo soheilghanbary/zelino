@@ -1,7 +1,6 @@
 import { call } from '@orpc/server'
 import { notFound } from 'next/navigation'
 import type { ReactNode } from 'react'
-import { SiteHeader } from '@/components/site-header'
 import {
 	getProfile,
 	ProfileExperienceList,
@@ -51,7 +50,7 @@ export const ProfileView = async ({ params }: Props) => {
 					<>
 						{profile.summary && (
 							<Section label="About">
-								<p className="max-w-prose select-text whitespace-pre-wrap text-pretty text-sm/7 motion-safe:animate-delay-100 motion-safe:animate-fade-in-up">
+								<p className="select-text whitespace-pre-wrap text-balance text-base/7 motion-safe:animate-delay-100 motion-safe:animate-fade-in-up">
 									{profile.summary}
 								</p>
 							</Section>
@@ -81,11 +80,8 @@ export const ProfileView = async ({ params }: Props) => {
 
 export default async function UserPage(props: Props) {
 	return (
-		<div className="min-h-svh">
-			<SiteHeader />
-			<main className="mx-auto w-full max-w-5xl px-4">
-				<ProfileView {...props} />
-			</main>
-		</div>
+		<main className="mx-auto w-full max-w-6xl px-4 md:py-20">
+			<ProfileView {...props} />
+		</main>
 	)
 }

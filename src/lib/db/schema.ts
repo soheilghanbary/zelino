@@ -26,6 +26,7 @@ export const user = pgTable('user', {
 	githubUrl: text('github_url').notNull().default(''),
 	linkedinUrl: text('linkedin_url').notNull().default(''),
 	portfolio: text('portfolio_url').notNull().default(''),
+	openToWork: boolean('open_to_work').default(false).notNull(),
 	username: text('username')
 		.notNull()
 		.$defaultFn(() => nanoid(8)),

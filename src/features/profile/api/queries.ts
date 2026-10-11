@@ -23,6 +23,7 @@ export const getProfile = os
 				githubUrl: user.githubUrl,
 				linkedinUrl: user.linkedinUrl,
 				portfolio: user.portfolio,
+				openToWork: user.openToWork,
 				skills: user.skills,
 				experiences: user.experiences,
 			})
@@ -45,6 +46,7 @@ export const getProfile = os
 			githubUrl: data.githubUrl,
 			linkedinUrl: data.linkedinUrl,
 			portfolio: data.portfolio,
+			openToWork: data.openToWork,
 			skills: parseSkills(data.skills),
 			experiences: parseExperiences(data.experiences),
 		}

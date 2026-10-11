@@ -6,12 +6,15 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
 	Field,
+	FieldContent,
+	FieldDescription,
 	FieldError,
 	FieldGroup,
 	FieldLabel,
 	FieldSet,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { client } from '@/lib/orpc/client'
 import { type AboutValues, aboutSchema } from '../schemas'
@@ -57,6 +60,7 @@ export function AboutForm(props: AboutValues) {
 			phone: data.phone,
 			githubUrl: data.githubUrl,
 			linkedinUrl: data.linkedinUrl,
+			openToWork: data.openToWork,
 		})
 	})
 
@@ -255,6 +259,34 @@ export function AboutForm(props: AboutValues) {
 										id={field.name}
 										rows={5}
 										aria-invalid={fieldState.invalid}
+										disabled={isSaving}
+									/>
+									<FieldError errors={[fieldState.error]} />
+								</Field>
+							)}
+						/>
+
+						<Controller
+							control={control}
+							name="openToWork"
+							render={({ field, fieldState }) => (
+								<Field
+									className="sm:col-span-2"
+									orientation="horizontal"
+									data-invalid={fieldState.invalid}
+								>
+									<FieldContent>
+										<FieldLabel htmlFor={field.name}>Open to work</FieldLabel>
+										<FieldDescription>
+											Show on your public profile that you are available for new
+											roles.
+										</FieldDescription>
+									</FieldContent>
+									<Switch
+										id={field.name}
+										name={field.name}
+										checked={field.value}
+										onCheckedChange={field.onChange}
 										disabled={isSaving}
 									/>
 									<FieldError errors={[fieldState.error]} />

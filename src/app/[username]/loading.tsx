@@ -91,14 +91,13 @@ export default function Loading() {
 									))}
 								</div>
 							</SectionSkeleton>
-
 							<SectionSkeleton className="border-t pt-8" labelWidth="w-14">
 								<div className="flex flex-wrap gap-2">
 									{['w-24', 'w-20', 'w-28', 'w-16', 'w-24', 'w-20'].map(
-										(width) => (
+										(width, index) => (
 											<Skeleton
+												key={`${width}-${index}`}
 												className={`h-6 rounded-4xl px-2.5 ${width}`}
-												key={width}
 											/>
 										)
 									)}

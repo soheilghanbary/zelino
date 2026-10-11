@@ -57,6 +57,7 @@ export const aboutSchema = z.object({
 	phone: phoneField,
 	githubUrl: urlField('GitHub'),
 	linkedinUrl: urlField('LinkedIn'),
+	openToWork: z.boolean(),
 })
 
 export type AboutValues = z.infer<typeof aboutSchema>

@@ -18,6 +18,7 @@ export type Profile = {
 	githubUrl: string
 	linkedinUrl: string
 	portfolio: string
+	openToWork: boolean
 	skills: Skill[]
 	experiences: ExperiencesValues
 }

@@ -46,7 +46,8 @@ export const updateUsername = authed
 			.select({ username: user.username })
 			.from(user)
 			.where(eq(user.username, input.username))
-		if (row) return { msg: 'Username already taken' }
+		if (row)
+			throw new ORPCError('CONFLICT', { message: 'Username already taken' })
 		await db.update(user).set(input).where(eq(user.id, context.userId))
 		return { msg: 'ok' }
 	})

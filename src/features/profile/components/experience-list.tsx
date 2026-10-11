@@ -28,7 +28,7 @@ export function ProfileExperienceList({ experiences }: Props) {
 						</p>
 					</div>
 					{experience.description && (
-						<p className="mt-1 max-w-prose select-text whitespace-pre-wrap text-pretty text-muted-foreground text-xs/5">
+						<p className="mt-1 select-text whitespace-pre-wrap text-pretty text-foreground/80 text-sm/6">
 							{experience.description}
 						</p>
 					)}

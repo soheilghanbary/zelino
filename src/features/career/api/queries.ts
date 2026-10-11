@@ -16,6 +16,7 @@ export const getUserAbout = authed.handler(async ({ context }) => {
 			phone: user.phone,
 			githubUrl: user.githubUrl,
 			linkedinUrl: user.linkedinUrl,
+			openToWork: user.openToWork,
 		})
 		.from(user)
 		.where(eq(user.id, context.userId))

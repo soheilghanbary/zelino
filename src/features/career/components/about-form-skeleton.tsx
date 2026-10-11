@@ -65,6 +65,14 @@ export function AboutFormSkeleton() {
 						</div>
 						<Skeleton className="h-24 w-full" />
 					</div>
+
+					<div className="flex items-center justify-between gap-3 sm:col-span-2">
+						<div className="flex flex-col gap-2">
+							<Skeleton className="h-4 w-28" />
+							<Skeleton className="h-3 w-72 max-w-full" />
+						</div>
+						<Skeleton className="h-[18.4px] w-[32px] rounded-full" />
+					</div>
 				</div>
 
 				<Skeleton className="h-9 w-24" />

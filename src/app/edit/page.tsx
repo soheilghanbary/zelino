@@ -8,6 +8,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { ScrollFade } from '@/components/scroll-fade'
 import { SiteHeader } from '@/components/site-header'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -96,24 +97,26 @@ export default function EditPage() {
 				</div>
 				<Separator className="my-4" />
 				<Tabs defaultValue="about">
-					<TabsList variant="line">
-						<TabsTrigger value="about">
-							<UserIcon />
-							About
-						</TabsTrigger>
-						<TabsTrigger value="experience">
-							<BriefcaseIcon />
-							Experience
-						</TabsTrigger>
-						<TabsTrigger value="skills">
-							<ZapIcon />
-							Skills
-						</TabsTrigger>
-						<TabsTrigger value="settings">
-							<SettingsIcon />
-							Settings
-						</TabsTrigger>
-					</TabsList>
+					<ScrollFade className="-mx-4 px-4 md:mx-0 md:px-0">
+						<TabsList variant="line">
+							<TabsTrigger value="about">
+								<UserIcon />
+								About
+							</TabsTrigger>
+							<TabsTrigger value="experience">
+								<BriefcaseIcon />
+								Experience
+							</TabsTrigger>
+							<TabsTrigger value="skills">
+								<ZapIcon />
+								Skills
+							</TabsTrigger>
+							<TabsTrigger value="settings">
+								<SettingsIcon />
+								Settings
+							</TabsTrigger>
+						</TabsList>
+					</ScrollFade>
 					<TabsContent value="about">
 						<Suspense fallback={<AboutFormSkeleton />}>
 							<AboutTab />

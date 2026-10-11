@@ -39,10 +39,10 @@ export function AuthMenu() {
 	if (!session?.user) {
 		return (
 			<Button
-				nativeButton={false}
 				size="sm"
-				variant="outline"
+				nativeButton={false}
 				render={<Link href="/login" />}
+				className={'mr-1 rounded-full'}
 			>
 				Sign in
 			</Button>
