@@ -8,6 +8,7 @@ export { UploadImage } from './components/upload-image'
 export type {
 	AboutInput,
 	AboutValues,
+	DeleteAccountInput,
 	Experience,
 	ExperienceInput,
 	ExperiencesValues,
@@ -15,6 +16,7 @@ export type {
 } from './schemas'
 export {
 	aboutSchema,
+	deleteAccountSchema,
 	experienceInputSchema,
 	experienceSchema,
 	imageSchema,

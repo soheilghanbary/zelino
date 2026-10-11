@@ -94,4 +94,13 @@ export const updateExperienceSchema = z.object({
 	experience: experienceInputSchema,
 })
 
+/**
+ * Deletion is irreversible, so the client has to retype the account's own
+ * username. The value is verified server-side against the row, not trusted.
+ */
+export const deleteAccountSchema = z.object({
+	confirm: z.string().trim().min(1, 'Type your username to confirm'),
+})
+
+export type DeleteAccountInput = z.infer<typeof deleteAccountSchema>
 export type ExperienceInput = z.infer<typeof experienceInputSchema>

@@ -149,7 +149,7 @@ export function ExperiencesList({ experiences }: Props) {
 			) : (
 				<ItemGroup>
 					{experiences.map((experience) => (
-						<Item key={experience.id} variant="outline">
+						<Item key={experience.id} variant="muted">
 							<ItemHeader>
 								<ItemMedia variant="icon">
 									<BriefcaseIcon />

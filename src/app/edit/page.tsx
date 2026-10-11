@@ -69,6 +69,11 @@ export const UserNameSection = async () => {
 	)
 }
 
+export const DeleteAccountSection = async () => {
+	const { username } = await call(getUserName)
+	return <DeleteModal username={username} />
+}
+
 export default function EditPage() {
 	return (
 		<div className="min-h-svh">
@@ -140,7 +145,9 @@ export default function EditPage() {
 							Permanently delete your account, portfolio, and public page. This
 							cannot be undone.
 						</p>
-						<DeleteModal />
+						<Suspense fallback={<Skeleton className="mt-4 h-9 w-36" />}>
+							<DeleteAccountSection />
+						</Suspense>
 					</TabsContent>
 				</Tabs>
 			</main>

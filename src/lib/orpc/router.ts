@@ -1,6 +1,7 @@
 import { os } from '@orpc/server'
 import {
 	addExperience,
+	deleteAccount,
 	removeExperience,
 	updateAbout,
 	updateExperience,
@@ -19,6 +20,7 @@ export const router = {
 	hello: helloRouter,
 	career: {
 		addExperience,
+		deleteAccount,
 		getUserName,
 		removeExperience,
 		updateAbout,

@@ -9,6 +9,7 @@ import { authed } from '@/lib/orpc/context'
 import {
 	aboutSchema,
 	addExperienceSchema,
+	deleteAccountSchema,
 	EXPERIENCES_MAX,
 	imageSchema,
 	removeExperienceSchema,
@@ -109,4 +110,36 @@ export const updateExperience = authed
 			.set({ experiences: next })
 			.where(eq(user.id, context.userId))
 		return { msg: 'Experience updated', experience: next[index] }
+	})
+
+export const deleteAccount = authed
+	.input(deleteAccountSchema)
+	.handler(async ({ input, context }) => {
+		const [row] = await db
+			.select({ id: user.id, username: user.username })
+			.from(user)
+			.where(eq(user.id, context.userId))
+
+		if (!row) throw new ORPCError('NOT_FOUND', { message: 'Account not found' })
+
+		// Compared against the row we just read. The confirmation is a guard
+		// against accidents, not an authorisation check — `context.userId`
+		// already decides whose account this is.
+		if (input.confirm.toLowerCase() !== row.username.toLowerCase()) {
+			throw new ORPCError('BAD_REQUEST', {
+				message: 'That does not match your username',
+			})
+		}
+
+		// `session` and `account` both cascade from this row, so the session
+		// cookie is dead the moment this returns.
+		const deleted = await db
+			.delete(user)
+			.where(eq(user.id, row.id))
+			.returning({ id: user.id })
+
+		if (deleted.length === 0)
+			throw new ORPCError('NOT_FOUND', { message: 'Account not found' })
+
+		return { msg: 'Account deleted' }
 	})

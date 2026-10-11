@@ -1,4 +1,5 @@
 'use client'
+import { cn } from 'cn'
 import { GalleryVerticalEndIcon } from 'lucide-react'
 import Link from 'next/link'
 import { AuthMenu } from './auth-menu'
@@ -13,9 +14,10 @@ export function SiteHeader({ className }: Props) {
 	return (
 		<header className="p-4">
 			<div
-				className={
-					'mx-auto flex w-full max-w-5xl items-center gap-2 rounded-full border border-border/60 bg-background/75 p-1 backdrop-blur-xl'
-				}
+				className={cn(
+					'mx-auto flex w-full max-w-5xl items-center gap-2 rounded-full border border-border/60 bg-background/75 p-1 backdrop-blur-xl',
+					className
+				)}
 			>
 				<Link
 					href="/"
