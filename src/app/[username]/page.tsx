@@ -1,87 +1,137 @@
 import { call } from '@orpc/server'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import type { ReactNode } from 'react'
+import { cache } from 'react'
+import { SiteHeader } from '@/components/site-header'
 import {
 	getProfile,
-	ProfileExperienceList,
-	ProfileSidebar,
+	getProfileSections,
+	ProfileEmptyState,
+	ProfileFooter,
+	ProfileHero,
+	ProfileSection,
+	ProfileSectionNav,
 	ProfileSkills,
+	ProfileTimeline,
+	profileDescription,
+	profileName,
 } from '@/features/profile'
 
 type Props = {
 	params: Promise<{ username: string }>
 }
 
-function Section({ label, children }: { label: string; children: ReactNode }) {
-	return (
-		<section className="flex flex-col gap-4 border-t pt-8 first:border-t-0 first:pt-0">
-			<h2 className="font-heading font-medium text-muted-foreground text-xs uppercase tracking-widest">
-				{label}
-			</h2>
-			{children}
-		</section>
-	)
+/**
+ * `generateMetadata` and the page both need the same row; `cache` collapses
+ * them into a single query per request.
+ */
+const loadProfile = cache(async (username: string) =>
+	call(getProfile, { username })
+)
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { username } = await params
+	const profile = await loadProfile(username)
+
+	if (!profile) return { title: 'Profile not found' }
+
+	const title = profileName(profile)
+	const description = profileDescription(profile)
+
+	return {
+		title,
+		description,
+		alternates: { canonical: `/${username}` },
+		openGraph: {
+			title,
+			description,
+			type: 'profile',
+			...(profile.image ? { images: [{ url: profile.image }] } : {}),
+		},
+		twitter: {
+			card: profile.image ? 'summary_large_image' : 'summary',
+			title,
+			description,
+			...(profile.image ? { images: [profile.image] } : {}),
+		},
+	}
 }
 
-export const ProfileView = async ({ params }: Props) => {
+export default async function UserPage({ params }: Props) {
 	const { username } = await params
-	const profile = await call(getProfile, { username })
+	const profile = await loadProfile(username)
 	if (!profile) notFound()
 
-	const hasCareer = Boolean(
-		profile.summary ||
-			profile.experiences.length > 0 ||
-			profile.skills.length > 0
-	)
+	const name = profileName(profile)
+	const sections = getProfileSections(profile)
 
 	return (
-		<div className="grid gap-10 p-8 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-14">
-			<div className="motion-safe:animate-fade-in-up">
-				<ProfileSidebar profile={profile} />
-			</div>
+		<div className="relative isolate min-h-svh">
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_18%_0%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent_65%)]"
+			/>
+			<div
+				aria-hidden="true"
+				className="mask-[radial-gradient(ellipse_70%_60%_at_50%_0%,#000_20%,transparent_100%)] pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-size-[32px_32px] opacity-60 dark:opacity-30"
+			/>
 
-			<div className="flex flex-col gap-8">
-				{!hasCareer ? (
-					<p className="text-balance rounded-lg border border-dashed p-10 text-center text-muted-foreground text-sm/6 motion-safe:animate-fade-in-up">
-						This profile is still a blank canvas. Everything you add in the
-						editor shows up here.
-					</p>
-				) : (
-					<>
-						{profile.summary && (
-							<Section label="About">
-								<p className="select-text whitespace-pre-wrap text-balance text-base/7 motion-safe:animate-delay-100 motion-safe:animate-fade-in-up">
-									{profile.summary}
-								</p>
-							</Section>
+			<SiteHeader className="max-w-5xl" />
+
+			<main className="mx-auto w-full max-w-5xl px-4 pb-24 md:px-6 md:pt-6">
+				<div className="grid gap-12 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-16">
+					<aside className="flex flex-col gap-8 lg:sticky lg:top-24 lg:self-start">
+						<div className="motion-safe:animate-fade-in-up">
+							<ProfileHero profile={profile} />
+						</div>
+						<div className="motion-safe:animate-delay-100 motion-safe:animate-fade-in-up">
+							<ProfileSectionNav sections={sections} />
+						</div>
+					</aside>
+
+					<div className="flex flex-col gap-10">
+						{sections.length === 0 ? (
+							<div className="motion-safe:animate-fade-in-up">
+								<ProfileEmptyState />
+							</div>
+						) : (
+							<>
+								{profile.summary && (
+									<ProfileSection delay={100} id="about" title="About">
+										<p className="max-w-prose select-text whitespace-pre-wrap text-pretty text-base/8">
+											{profile.summary}
+										</p>
+									</ProfileSection>
+								)}
+
+								{profile.experiences.length > 0 && (
+									<ProfileSection
+										count={profile.experiences.length}
+										delay={150}
+										id="experience"
+										title="Experience"
+									>
+										<ProfileTimeline experiences={profile.experiences} />
+									</ProfileSection>
+								)}
+
+								{profile.skills.length > 0 && (
+									<ProfileSection
+										count={profile.skills.length}
+										delay={200}
+										id="skills"
+										title="Skills"
+									>
+										<ProfileSkills skills={profile.skills} />
+									</ProfileSection>
+								)}
+							</>
 						)}
 
-						{profile.experiences.length > 0 && (
-							<Section label="Experience">
-								<div className="motion-safe:animate-delay-200 motion-safe:animate-fade-in-up">
-									<ProfileExperienceList experiences={profile.experiences} />
-								</div>
-							</Section>
-						)}
-
-						{profile.skills.length > 0 && (
-							<Section label="Skills">
-								<div className="motion-safe:animate-delay-300 motion-safe:animate-fade-in-up">
-									<ProfileSkills skills={profile.skills} />
-								</div>
-							</Section>
-						)}
-					</>
-				)}
-			</div>
+						<ProfileFooter name={name} />
+					</div>
+				</div>
+			</main>
 		</div>
-	)
-}
-
-export default async function UserPage(props: Props) {
-	return (
-		<main className="mx-auto w-full max-w-6xl px-4 md:py-20">
-			<ProfileView {...props} />
-		</main>
 	)
 }

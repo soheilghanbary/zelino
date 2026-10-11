@@ -53,57 +53,89 @@
 
 :root {
 	--background: oklch(1 0 0);
-	--foreground: oklch(0.2795 0.0368 260.03);
+	--foreground: oklch(0.145 0 0);
 	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.2795 0.0368 260.03);
+	--card-foreground: oklch(0.145 0 0);
 	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.2795 0.0368 260.03);
+	--popover-foreground: oklch(0.145 0 0);
 	--primary: oklch(0.491 0.27 292.581);
 	--primary-foreground: oklch(0.969 0.016 293.756);
-	--secondary: oklch(0.98 0.0062 255.47);
-	--secondary-foreground: oklch(0.2795 0.0368 260.03);
-	--muted: oklch(0.98 0.0062 255.47);
-	--muted-foreground: oklch(0.551 0.0234 264.36);
-	--accent: oklch(0.98 0.0062 255.47);
-	--accent-foreground: oklch(0.3796 0.1417 275.75);
-	--destructive: oklch(0.6368 0.2078 25.33);
-	--border: oklch(0.9276 0.0058 264.53);
-	--input: oklch(0.9276 0.0058 264.53);
-	--ring: oklch(0.491 0.27 292.581);
+	--secondary: oklch(0.967 0.001 286.375);
+	--secondary-foreground: oklch(0.21 0.006 285.885);
+	--muted: oklch(0.97 0 0);
+	--muted-foreground: oklch(0.556 0 0);
+	--accent: oklch(0.97 0 0);
+	--accent-foreground: oklch(0.205 0 0);
+	--destructive: oklch(0.577 0.245 27.325);
+	--border: oklch(0.922 0 0);
+	--input: oklch(0.922 0 0);
+	--ring: oklch(0.708 0 0);
+	--chart-1: oklch(0.87 0 0);
+	--chart-2: oklch(0.556 0 0);
+	--chart-3: oklch(0.439 0 0);
+	--chart-4: oklch(0.371 0 0);
+	--chart-5: oklch(0.269 0 0);
 	--radius: 0.625rem;
+	--sidebar: oklch(0.985 0 0);
+	--sidebar-foreground: oklch(0.145 0 0);
+	--sidebar-primary: oklch(0.541 0.281 293.009);
+	--sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+	--sidebar-accent: oklch(0.97 0 0);
+	--sidebar-accent-foreground: oklch(0.205 0 0);
+	--sidebar-border: oklch(0.922 0 0);
+	--sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
-	--background: oklch(0.1448 0.0044 264.36);
-	--foreground: oklch(0.9067 0.0069 264.53);
-	--card: oklch(0.1913 0.0074 264.42);
-	--card-foreground: oklch(0.9067 0.0069 264.53);
-	--popover: oklch(0.1913 0.0074 264.42);
-	--popover-foreground: oklch(0.9067 0.0069 264.53);
+	--background: oklch(0.145 0 0);
+	--foreground: oklch(0.985 0 0);
+	--card: oklch(0.205 0 0);
+	--card-foreground: oklch(0.985 0 0);
+	--popover: oklch(0.205 0 0);
+	--popover-foreground: oklch(0.985 0 0);
 	--primary: oklch(0.432 0.232 292.759);
 	--primary-foreground: oklch(0.969 0.016 293.756);
-	--secondary: oklch(0.2603 0.0088 264.42);
-	--secondary-foreground: oklch(0.9067 0.0069 264.53);
-	--muted: oklch(0.2603 0.0088 264.42);
-	--muted-foreground: oklch(0.6613 0.0187 264.36);
-	--accent: oklch(0.2603 0.0088 264.42);
-	--accent-foreground: oklch(0.8391 0.0663 275.75);
+	--secondary: oklch(0.274 0.006 286.033);
+	--secondary-foreground: oklch(0.985 0 0);
+	--muted: oklch(0.269 0 0);
+	--muted-foreground: oklch(0.708 0 0);
+	--accent: oklch(0.269 0 0);
+	--accent-foreground: oklch(0.985 0 0);
 	--destructive: oklch(0.704 0.191 22.216);
 	--border: oklch(1 0 0 / 10%);
 	--input: oklch(1 0 0 / 15%);
-	--ring: oklch(0.705 0.015 286.067);
-	--radius: 0.625rem;
+	--ring: oklch(0.556 0 0);
+	--chart-1: oklch(0.87 0 0);
+	--chart-2: oklch(0.556 0 0);
+	--chart-3: oklch(0.439 0 0);
+	--chart-4: oklch(0.371 0 0);
+	--chart-5: oklch(0.269 0 0);
+	--sidebar: oklch(0.205 0 0);
+	--sidebar-foreground: oklch(0.985 0 0);
+	--sidebar-primary: oklch(0.606 0.25 292.717);
+	--sidebar-primary-foreground: oklch(0.969 0.016 293.756);
+	--sidebar-accent: oklch(0.269 0 0);
+	--sidebar-accent-foreground: oklch(0.985 0 0);
+	--sidebar-border: oklch(1 0 0 / 10%);
+	--sidebar-ring: oklch(0.556 0 0);
 }
 
 @layer base {
 	* {
-		@apply border-border outline-ring/50 outline-none select-none;
+		@apply outline-none select-none border-border outline-ring/50;
 		-webkit-tap-highlight-color: transparent;
 		-webkit-touch-callout: none;
 	}
 	html {
 		@apply font-sans;
 		overflow-x: clip;
+	}
+	/* Anchor links land under the sticky header; scroll-mt handles the offset,
+	   this only makes the jump readable instead of a teleport. */
+	@media (prefers-reduced-motion: no-preference) {
+		html {
+			scroll-behavior: smooth;
+		}
 	}
 	body {
 		position: relative;
