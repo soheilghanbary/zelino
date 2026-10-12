@@ -60,7 +60,7 @@ export default function Loading() {
 						<aside className="flex flex-col gap-8">
 							<div className="flex flex-col gap-7">
 								<div className="flex flex-col gap-5">
-									<Skeleton className="size-24 rounded-2xl sm:size-28" />
+									<Skeleton className="size-24 rounded-full sm:size-28" />
 									<div className="flex flex-col gap-3">
 										<Skeleton className="h-8 w-48" />
 										<Skeleton className="h-4 w-32" />

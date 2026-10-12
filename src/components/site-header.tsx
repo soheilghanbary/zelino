@@ -20,7 +20,7 @@ export function SiteHeader({ className }: Props) {
 			>
 				<Link
 					href="/"
-					className="group ml-3 flex shrink-0 items-center gap-2 rounded-full font-bold text-primary"
+					className="group ml-3 flex shrink-0 items-center gap-2 rounded-full font-bold text-primary dark:text-primary-foreground"
 				>
 					Zelino
 				</Link>
