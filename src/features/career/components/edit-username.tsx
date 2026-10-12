@@ -24,6 +24,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { toast } from '@/components/ui/toast'
+import { appConfig } from '@/config'
 import { client } from '@/lib/orpc/client'
 
 type Props = {
@@ -94,7 +95,7 @@ export function EditUsername({ value }: Props) {
 									{...register('username')}
 								/>
 								<FieldDescription className="wrap-anywhere">
-									zelino.vercel.app/
+									{appConfig.siteDomain}/
 									<span className="text-foreground">{username}</span>
 								</FieldDescription>
 							</Field>

@@ -48,7 +48,6 @@ export function ShareButton({ name }: Props) {
 			className="rounded-full"
 			disabled={pending}
 			onClick={share}
-			size="sm"
 			variant="outline"
 		>
 			{pending ? <Spinner /> : <Share2Icon />}

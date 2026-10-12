@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { appConfig } from '@/config'
 import {
 	AboutForm,
 	AboutFormSkeleton,
@@ -48,17 +49,27 @@ export const ExperienceTab = async () => {
 
 export const UserNameSection = async () => {
 	const { username } = await call(getUserName)
+	const url = `${appConfig.siteDomain}/${username}`
+
 	return (
 		<>
-			<div className="w-fit rounded-lg border bg-muted/40 p-2">
-				<p className="text-sm/5 tracking-wider">
-					zelino.vercel.app/
-					<span className="pl-0.5 text-muted-foreground">{username}</span>
+			<div className="flex h-9 min-w-0 items-center gap-2 rounded-lg border bg-muted px-2.5 shadow-xs">
+				<Link2Icon
+					aria-hidden
+					className="size-3.5 shrink-0 text-muted-foreground"
+				/>
+				<p className="flex min-w-0 items-baseline text-sm/5" title={url}>
+					<span className="truncate text-muted-foreground">
+						{appConfig.siteDomain}/
+					</span>
+					<span className="font-medium text-foreground">{username}</span>
 				</p>
 			</div>
 			<EditUsername value={username} />
 			<Button
 				render={<Link href={`/${username}`} />}
+				aria-label={`Open ${url}`}
+				className="shrink-0"
 				nativeButton={false}
 				variant="outline"
 				size={'icon'}
@@ -91,9 +102,9 @@ export default function EditPage() {
 					<Suspense
 						fallback={
 							<>
-								<Skeleton className="h-9 w-47" />
-								<Skeleton className="size-9" />
-								<Skeleton className="size-9" />
+								<Skeleton className="h-9 w-48" />
+								<Skeleton className="size-9 shrink-0" />
+								<Skeleton className="size-9 shrink-0" />
 							</>
 						}
 					>

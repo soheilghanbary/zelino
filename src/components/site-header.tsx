@@ -1,29 +1,35 @@
-'use client'
 import { cn } from 'cn'
+import { GalleryVerticalEndIcon } from 'lucide-react'
 import Link from 'next/link'
 import { AuthMenu } from './auth-menu'
 import { ModeToggle } from './mode-toggle'
 
 type Props = {
-	/** Width of the pill, so wide pages can match their own content column. */
+	/** Width of the inner bar, so it can line up with the page's own column. */
 	className?: string
 }
 
 export function SiteHeader({ className }: Props) {
 	return (
-		<header className="p-4">
+		<header className="sticky top-0 z-50 border-border/60 border-b bg-background/70 backdrop-blur-xl">
 			<div
 				className={cn(
-					'mx-auto flex w-full max-w-5xl items-center gap-2 rounded-full border border-border/60 bg-background/75 p-1 backdrop-blur-xl',
+					'mx-auto flex h-14 w-full max-w-5xl items-center gap-3 px-4 md:h-16 md:px-6',
 					className
 				)}
 			>
 				<Link
+					className="group -ms-1.5 flex shrink-0 items-center gap-2 rounded-lg px-1.5 py-1 outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
 					href="/"
-					className="group ml-3 flex shrink-0 items-center gap-2 rounded-full font-bold text-primary dark:text-primary-foreground"
 				>
-					Zelino
+					<span className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary/15">
+						<GalleryVerticalEndIcon aria-hidden className="size-4" />
+					</span>
+					<span className="font-heading font-semibold text-sm tracking-tight">
+						Zelino
+					</span>
 				</Link>
+
 				<div className="ms-auto flex items-center gap-1">
 					<ModeToggle />
 					<AuthMenu />

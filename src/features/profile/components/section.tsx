@@ -21,7 +21,7 @@ export function ProfileSection({
 }: Props) {
 	return (
 		<section
-			className="scroll-mt-4 pt-4 first:pt-0 motion-safe:animate-fade-in-up md:scroll-mt-6"
+			className="scroll-mt-16 pt-4 first:pt-0 motion-safe:animate-fade-in-up md:scroll-mt-20"
 			id={id}
 			style={{ animationDelay: `${delay}ms` }}
 		>

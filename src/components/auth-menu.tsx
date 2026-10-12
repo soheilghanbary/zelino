@@ -1,7 +1,7 @@
 'use client'
 
 import { skipToken, useQuery } from '@tanstack/react-query'
-import { Edit3, Link2, LogOutIcon } from 'lucide-react'
+import { Edit3, Link2, LogIn, LogOutIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -39,11 +39,11 @@ export function AuthMenu() {
 	if (!session?.user) {
 		return (
 			<Button
-				size="sm"
 				nativeButton={false}
 				render={<Link href="/login" />}
 				className={'mr-1 rounded-full'}
 			>
+				<LogIn />
 				Sign in
 			</Button>
 		)
