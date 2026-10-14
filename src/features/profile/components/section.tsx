@@ -35,7 +35,7 @@ export function ProfileSection({
 					</span>
 				)}
 			</div>
-			<div className="pl-4 md:pl-4">{children}</div>
+			<div className="ps-2">{children}</div>
 		</section>
 	)
 }

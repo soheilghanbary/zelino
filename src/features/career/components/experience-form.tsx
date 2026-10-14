@@ -40,7 +40,7 @@ export function ExperienceForm({ experience, onSuccess }: Props) {
 	const {
 		control,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isValid },
 		reset,
 	} = useForm({
 		resolver: zodResolver(experienceInputSchema),
@@ -56,11 +56,27 @@ export function ExperienceForm({ experience, onSuccess }: Props) {
 	})
 
 	const { mutateAsync: add, isPending: isAdding } = useMutation(
-		client.career.addExperience.mutationOptions()
+		client.career.addExperience.mutationOptions({
+			onError(err) {
+				toast.add({
+					title: 'Error',
+					type: 'error',
+					description: err.message,
+				})
+			},
+		})
 	)
 
 	const { mutateAsync: update, isPending: isUpdating } = useMutation(
-		client.career.updateExperience.mutationOptions()
+		client.career.updateExperience.mutationOptions({
+			onError(err) {
+				toast.add({
+					title: 'Error',
+					type: 'error',
+					description: err.message,
+				})
+			},
+		})
 	)
 
 	const isPending = isAdding || isUpdating
@@ -156,6 +172,8 @@ export function ExperienceForm({ experience, onSuccess }: Props) {
 									{...field}
 									id={field.name}
 									rows={4}
+									maxLength={DESCRIPTION_MAX}
+									className="max-h-40 overflow-y-auto"
 									placeholder="What did you build and ship?"
 									aria-invalid={fieldState.invalid}
 								/>
@@ -164,7 +182,12 @@ export function ExperienceForm({ experience, onSuccess }: Props) {
 						)}
 					/>
 
-					<Button type="submit" className="ml-auto w-fit" aria-busy={isPending}>
+					<Button
+						type="submit"
+						className="ml-auto w-fit"
+						aria-busy={isPending}
+						disabled={isPending || !isValid}
+					>
 						{isPending && <Spinner />}
 						{experience ? 'Save changes' : 'Add experience'}
 					</Button>

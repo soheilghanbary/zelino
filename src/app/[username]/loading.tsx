@@ -55,7 +55,7 @@ export default function Loading() {
 					</div>
 				</header>
 
-				<main className="mx-auto w-full max-w-5xl px-4 pb-24 md:px-6 md:pt-6">
+				<main className="mx-auto w-full max-w-5xl p-6 px-4 pb-24">
 					<div className="grid gap-12 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-16">
 						<aside className="flex flex-col gap-8">
 							<div className="flex flex-col gap-7">

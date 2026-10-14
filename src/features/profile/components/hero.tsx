@@ -21,8 +21,8 @@ export function ProfileHero({ profile }: Props) {
 
 	return (
 		<div className="flex flex-col gap-6">
-			<div className="flex flex-col gap-5 text-center sm:text-left">
-				<Avatar className="mx-auto size-24 rounded-full ring-1 ring-border sm:mx-0 sm:size-28">
+			<div className="flex flex-col gap-5">
+				<Avatar className="size-24 rounded-full ring-1 ring-border sm:size-28">
 					{profile.image ? (
 						<AvatarImage alt={name} src={profile.image} />
 					) : (
@@ -108,7 +108,7 @@ export function ProfileHero({ profile }: Props) {
 				</ul>
 			)}
 
-			<div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+			<div className="flex flex-wrap items-center gap-2">
 				<LinkButtons links={getProfileLinks(profile)} />
 				<ShareButton name={name} />
 			</div>

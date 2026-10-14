@@ -15,6 +15,13 @@ import {
 	DialogTrigger,
 } from '@/components/ui/dialog'
 import {
+	Drawer,
+	DrawerContent,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger,
+} from '@/components/ui/drawer'
+import {
 	Field,
 	FieldDescription,
 	FieldGroup,
@@ -25,6 +32,7 @@ import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { toast } from '@/components/ui/toast'
 import { appConfig } from '@/config'
+import { useIsMobile } from '@/hooks/use-mobile'
 import { client } from '@/lib/orpc/client'
 
 type Props = {
@@ -35,6 +43,7 @@ const MAX_LENGTH = 20
 
 export function EditUsername({ value }: Props) {
 	const router = useRouter()
+	const isMobile = useIsMobile()
 	const [open, setOpen] = useState(false)
 	const {
 		register,
@@ -72,48 +81,66 @@ export function EditUsername({ value }: Props) {
 		reset({ username: data.username })
 	})
 
+	const trigger = (
+		<Button variant="outline" size={'icon'}>
+			<Edit3Icon />
+		</Button>
+	)
+
+	const content = (
+		<form onSubmit={onSave}>
+			<FieldSet disabled={isPending}>
+				<FieldGroup className="gap-4">
+					<Field className="col-span-2">
+						<FieldLabel>
+							Username ({username.length}/{MAX_LENGTH})
+						</FieldLabel>
+						<Input
+							type="text"
+							placeholder="new username"
+							maxLength={MAX_LENGTH}
+							{...register('username')}
+						/>
+						<FieldDescription className="wrap-anywhere">
+							{appConfig.siteDomain}/
+							<span className="text-foreground">{username}</span>
+						</FieldDescription>
+					</Field>
+					<Button
+						type="submit"
+						className={'ml-auto w-fit'}
+						disabled={!isDirty || isPending}
+					>
+						{isPending && <Spinner />}
+						Save changes
+					</Button>
+				</FieldGroup>
+			</FieldSet>
+		</form>
+	)
+
+	if (isMobile) {
+		return (
+			<Drawer open={open} onOpenChange={setOpen} showSwipeHandle>
+				<DrawerTrigger render={trigger} />
+				<DrawerContent>
+					<DrawerHeader>
+						<DrawerTitle>Update your username</DrawerTitle>
+					</DrawerHeader>
+					<div className="p-4">{content}</div>
+				</DrawerContent>
+			</Drawer>
+		)
+	}
+
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger
-				render={
-					<Button variant="outline" size={'icon'}>
-						<Edit3Icon />
-					</Button>
-				}
-			/>
+			<DialogTrigger render={trigger} />
 			<DialogContent className={'sm:max-w-xs'}>
 				<DialogHeader>
 					<DialogTitle>Update your username</DialogTitle>
 				</DialogHeader>
-				<form onSubmit={onSave}>
-					<FieldSet disabled={isPending}>
-						<FieldGroup className="gap-4">
-							<Field className="col-span-2">
-								<FieldLabel>
-									Username ({username.length}/{MAX_LENGTH})
-								</FieldLabel>
-								<Input
-									type="text"
-									placeholder="new username"
-									maxLength={MAX_LENGTH}
-									{...register('username')}
-								/>
-								<FieldDescription className="wrap-anywhere">
-									{appConfig.siteDomain}/
-									<span className="text-foreground">{username}</span>
-								</FieldDescription>
-							</Field>
-							<Button
-								type="submit"
-								className={'ml-auto w-fit'}
-								disabled={!isDirty || isPending}
-							>
-								{isPending && <Spinner />}
-								Save changes
-							</Button>
-						</FieldGroup>
-					</FieldSet>
-				</form>
+				{content}
 			</DialogContent>
 		</Dialog>
 	)
