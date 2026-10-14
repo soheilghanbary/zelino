@@ -11,7 +11,7 @@ type Props = {
 	className?: string
 }
 
-const HIDE_AFTER = 120
+const HIDE_AFTER = 20
 const SCROLL_THRESHOLD = 4
 
 const ACTIVE_CONTROL_SELECTOR = [

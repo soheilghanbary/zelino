@@ -1,5 +1,0 @@
-export { LandingCta } from './components/cta'
-export { LandingFeatures } from './components/features'
-export { LandingFooter } from './components/footer'
-export { LandingHero } from './components/hero'
-export { HeroPreview } from './components/preview'
