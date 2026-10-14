@@ -66,24 +66,13 @@ export default async function UserPage({ params }: Props) {
 	const sections = getProfileSections(profile)
 
 	return (
-		// Anchor jumps are eased rather than teleported; `motion-safe` keeps
-		// this off for readers who asked for reduced motion.
-		<div className="relative isolate min-h-svh">
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_50%_at_18%_0%,color-mix(in_oklch,var(--primary)_16%,transparent),transparent_65%)]"
-			/>
-			<div
-				aria-hidden="true"
-				className="mask-[radial-gradient(ellipse_70%_60%_at_50%_0%,#000_20%,transparent_100%)] pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-size-[32px_32px] opacity-60 dark:opacity-30"
-			/>
-
+		<div className="relative isolate min-h-svh bg-background">
 			<SiteHeader />
 
 			<main className="mx-auto w-full max-w-5xl px-4 pb-24 md:px-6 md:pt-6">
 				<div className="grid gap-12 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-16">
 					<aside className="flex flex-col gap-8 lg:sticky lg:top-24 lg:self-start">
-						<div className="mt-6 motion-safe:animate-fade-in-up">
+						<div className="motion-safe:animate-fade-in-up">
 							<ProfileHero profile={profile} />
 						</div>
 						<div className="motion-safe:animate-delay-100 motion-safe:animate-fade-in-up">
@@ -100,7 +89,7 @@ export default async function UserPage({ params }: Props) {
 							<>
 								{profile.summary && (
 									<ProfileSection delay={100} id="about" title="About">
-										<p className="max-w-prose select-text whitespace-pre-wrap text-pretty text-base/8">
+										<p className="max-w-prose select-text whitespace-pre-wrap text-pretty text-base/8 text-muted-foreground">
 											{profile.summary}
 										</p>
 									</ProfileSection>

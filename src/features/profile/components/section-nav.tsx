@@ -66,7 +66,7 @@ export function ProfileSectionNav({ sections }: Props) {
 	if (sections.length < 2) return null
 
 	return (
-		<nav aria-label="Profile sections" className="flex flex-col gap-0.5">
+		<nav aria-label="Profile sections" className="flex flex-col gap-1">
 			{sections.map((section) => {
 				const Icon = ICONS[section.id]
 				const isActive = active === section.id
@@ -75,21 +75,14 @@ export function ProfileSectionNav({ sections }: Props) {
 					<a
 						aria-current={isActive ? 'true' : undefined}
 						className={cn(
-							'group relative flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors',
+							'group relative flex items-center gap-2.5 rounded-lg px-3 py-2 transition-colors',
 							isActive
-								? 'text-primary'
+								? 'bg-primary/10 text-primary'
 								: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
 						)}
 						href={`#${section.id}`}
 						key={section.id}
 					>
-						<span
-							aria-hidden
-							className={cn(
-								'absolute inset-s-0 inset-y-2 w-0.5 rounded-full bg-primary transition-opacity',
-								isActive ? 'opacity-100' : 'opacity-0'
-							)}
-						/>
 						<Icon
 							aria-hidden
 							className={cn(

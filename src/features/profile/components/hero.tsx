@@ -20,9 +20,9 @@ export function ProfileHero({ profile }: Props) {
 	const hasMeta = Boolean(profile.location || profile.email || profile.phone)
 
 	return (
-		<div className="flex flex-col gap-7">
-			<div className="flex flex-col gap-5">
-				<Avatar className="size-24 rounded-full ring-1 ring-border sm:size-28">
+		<div className="flex flex-col gap-6">
+			<div className="flex flex-col gap-5 text-center sm:text-left">
+				<Avatar className="mx-auto size-24 rounded-full ring-1 ring-border sm:mx-0 sm:size-28">
 					{profile.image ? (
 						<AvatarImage alt={name} src={profile.image} />
 					) : (
@@ -35,7 +35,7 @@ export function ProfileHero({ profile }: Props) {
 					)}
 				</Avatar>
 
-				<div className="flex select-text flex-col gap-2">
+				<div className="flex flex-col gap-2">
 					<h1 className="text-balance font-bold font-heading text-3xl tracking-tight">
 						{name}
 					</h1>
@@ -54,21 +54,26 @@ export function ProfileHero({ profile }: Props) {
 				</div>
 
 				{profile.openToWork && (
-					<Badge
-						className="h-6 w-fit gap-1.5 border-emerald-600/20 bg-emerald-600/10 px-2 font-medium text-emerald-700 dark:border-emerald-400/25 dark:bg-emerald-400/10 dark:text-emerald-300"
-						variant="outline"
-					>
-						<SparklesIcon aria-hidden />
-						#OpenToWork
-					</Badge>
+					<div className="flex justify-center sm:justify-start">
+						<Badge
+							className="h-6 w-fit gap-1.5 border-emerald-600/20 bg-emerald-600/10 px-2 font-medium text-emerald-700 dark:border-emerald-400/25 dark:bg-emerald-400/10 dark:text-emerald-300"
+							variant="outline"
+						>
+							<SparklesIcon aria-hidden />
+							#OpenToWork
+						</Badge>
+					</div>
 				)}
 			</div>
 
 			{hasMeta && (
-				<ul className="flex flex-col gap-1.5 text-muted-foreground text-sm/6">
+				<ul className="flex flex-col gap-2 text-foreground/85 text-sm/6">
 					{profile.location && (
 						<li className="flex items-center gap-2">
-							<MapPinIcon aria-hidden className="size-3.5 shrink-0" />
+							<MapPinIcon
+								aria-hidden
+								className="size-3.5 shrink-0 opacity-60"
+							/>
 							<span className="wrap-anywhere">{profile.location}</span>
 						</li>
 					)}
@@ -78,7 +83,10 @@ export function ProfileHero({ profile }: Props) {
 								className="flex w-fit max-w-full items-center gap-2 rounded-md transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
 								href={`mailto:${profile.email}`}
 							>
-								<MailIcon aria-hidden className="size-3.5 shrink-0" />
+								<MailIcon
+									aria-hidden
+									className="size-3.5 shrink-0 opacity-60"
+								/>
 								<span className="wrap-anywhere">{profile.email}</span>
 							</a>
 						</li>
@@ -89,7 +97,10 @@ export function ProfileHero({ profile }: Props) {
 								className="flex w-fit max-w-full items-center gap-2 rounded-md transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
 								href={`tel:${profile.phone.replace(/[^\d+]/g, '')}`}
 							>
-								<PhoneIcon aria-hidden className="size-3.5 shrink-0" />
+								<PhoneIcon
+									aria-hidden
+									className="size-3.5 shrink-0 opacity-60"
+								/>
 								<span className="wrap-anywhere">{profile.phone}</span>
 							</a>
 						</li>
@@ -97,7 +108,7 @@ export function ProfileHero({ profile }: Props) {
 				</ul>
 			)}
 
-			<div className="flex flex-wrap items-center gap-2">
+			<div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
 				<LinkButtons links={getProfileLinks(profile)} />
 				<ShareButton name={name} />
 			</div>

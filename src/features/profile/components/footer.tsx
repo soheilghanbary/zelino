@@ -7,7 +7,7 @@ type Props = {
 
 export function ProfileFooter({ name }: Props) {
 	return (
-		<footer className="flex flex-wrap items-center justify-between gap-3 border-t pt-6 text-muted-foreground text-xs">
+		<footer className="mt-12 flex flex-col items-center gap-2 border-t pt-6 text-center text-muted-foreground text-xs sm:flex-row sm:items-center sm:justify-between sm:text-left">
 			<p>
 				© {new Date().getUTCFullYear()} {name}
 			</p>

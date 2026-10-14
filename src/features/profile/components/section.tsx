@@ -25,17 +25,17 @@ export function ProfileSection({
 			id={id}
 			style={{ animationDelay: `${delay}ms` }}
 		>
-			<div className="flex items-center gap-2">
-				<h2 className="font-heading font-medium text-muted-foreground text-xs uppercase tracking-[0.16em]">
+			<div className="mb-6 flex items-center gap-2">
+				<h2 className="font-bold font-heading text-foreground text-sm uppercase tracking-[0.16em]">
 					{title}
 				</h2>
 				{count !== undefined && (
-					<span className="rounded-4xl bg-muted px-1.5 py-0.5 font-medium text-muted-foreground text-xs tabular-nums">
+					<span className="rounded-full bg-muted px-2 py-0.5 font-medium text-muted-foreground text-xs tabular-nums">
 						{count}
 					</span>
 				)}
 			</div>
-			<div className="mt-6">{children}</div>
+			<div className="pl-4 md:pl-4">{children}</div>
 		</section>
 	)
 }
