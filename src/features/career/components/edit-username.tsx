@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import { Edit3Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
@@ -49,13 +49,12 @@ export function EditUsername({ value }: Props) {
 
 	const username = watch('username')
 
+	useEffect(() => {
+		reset({ username: value })
+	}, [value, reset])
+
 	const { mutateAsync, isPending } = useMutation(
 		client.career.updateUsername.mutationOptions({
-			onSuccess() {
-				router.refresh()
-				setOpen(false)
-				reset()
-			},
 			onError(err) {
 				toast.add({
 					title: 'Error',
@@ -66,7 +65,12 @@ export function EditUsername({ value }: Props) {
 		})
 	)
 
-	const onSave = handleSubmit(async (data) => await mutateAsync(data))
+	const onSave = handleSubmit(async (data) => {
+		await mutateAsync(data)
+		router.refresh()
+		setOpen(false)
+		reset({ username: data.username })
+	})
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -101,9 +105,8 @@ export function EditUsername({ value }: Props) {
 							</Field>
 							<Button
 								type="submit"
-								onClick={onSave}
 								className={'ml-auto w-fit'}
-								disabled={!isDirty}
+								disabled={!isDirty || isPending}
 							>
 								{isPending && <Spinner />}
 								Save changes
