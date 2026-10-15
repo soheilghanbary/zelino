@@ -15,7 +15,7 @@ rendered well.
 | --- | --- |
 | Framework | [Next.js 16](https://nextjs.org) (App Router, Turbopack, React Compiler) |
 | API | [oRPC](https://orpc.unnoq.com) end-to-end typed router |
-| Auth | [Better Auth](https://better-auth.com) (Google OAuth + email/password) |
+| Auth | [Better Auth](https://better-auth.com) (Google OAuth) |
 | Database | PostgreSQL via [Drizzle ORM](https://orm.drizzle.team) |
 | Data fetching | [TanStack Query](https://tanstack.com/query) + [nuqs](https://nuqs.dev) |
 | UI | [Tailwind CSS v4](https://tailwindcss.com) + [Base UI](https://base-ui.com) (shadcn-style registry) |

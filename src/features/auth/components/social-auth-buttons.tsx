@@ -4,7 +4,7 @@ import { cn } from 'cn'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { useSocialSignIn } from '../hooks/use-social-sign-in'
-import { SOCIAL_PROVIDER_LABELS, type SocialProvider } from '../lib'
+import type { SocialProvider } from '../lib'
 import { GoogleIcon } from './google-icon'
 
 type SocialAuthButtonsProps = {
@@ -29,8 +29,8 @@ export function SocialAuthButtons({
 			<Button
 				type="button"
 				variant="outline"
-				onClick={() => signInWithProvider('google')}
 				disabled={disabled ?? isPending}
+				onClick={() => signInWithProvider('google')}
 				aria-busy={pendingProvider === 'google'}
 			>
 				{pendingProvider === 'google' ? (
@@ -38,9 +38,7 @@ export function SocialAuthButtons({
 				) : (
 					<GoogleIcon className="size-4" />
 				)}
-				{pendingProvider === 'google'
-					? 'Redirecting to Google…'
-					: `Continue with ${SOCIAL_PROVIDER_LABELS.google}`}
+				Sign in with Google
 			</Button>
 			{socialError && (
 				<p role="alert" className="text-center text-destructive text-sm">

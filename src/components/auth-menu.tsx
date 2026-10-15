@@ -19,7 +19,7 @@ import { signOut, useSession } from '@/lib/auth/client'
 import { client } from '@/lib/orpc/client'
 
 export function AuthMenu() {
-	const router = useRouter()
+	const _router = useRouter()
 	const { data: session, isPending } = useSession()
 	const { data: userName } = useQuery(
 		client.career.getUserName.queryOptions({
@@ -50,9 +50,9 @@ export function AuthMenu() {
 	}
 
 	const handleSignOut = async () => {
-		await signOut()
-		router.push('/login')
-		router.refresh()
+		await signOut({
+			callbackURL: '/login',
+		})
 	}
 
 	return (
