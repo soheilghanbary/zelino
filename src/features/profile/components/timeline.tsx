@@ -12,23 +12,23 @@ const PERIOD_BASE =
 
 export function ProfileTimeline({ experiences }: Props) {
 	return (
-		<ol className="flex flex-col gap-8">
-			{experiences.map((experience, index) => {
+		// The rail is drawn on the list itself so it never has to know which
+		// entry is last — no `:last-child` bookkeeping on every row.
+		<ol className="relative flex flex-col gap-8 before:absolute before:start-[0.4375rem] before:top-3 before:bottom-3 before:w-px before:bg-border">
+			{experiences.map((experience) => {
 				const current = isCurrentPeriod(experience.period)
 
 				return (
-					<li className="group relative flex gap-4" key={experience.id}>
-						<div className="flex shrink-0 flex-col items-center">
-							<span
-								aria-hidden
-								className="relative z-10 size-3 rounded-full border-2 border-border bg-background transition-colors group-hover:border-primary group-hover:bg-primary"
-							/>
-							{index < experiences.length - 1 && (
-								<span aria-hidden className="mt-2 h-full w-px bg-border/50" />
-							)}
-						</div>
+					<li
+						className="relative grid grid-cols-[0.875rem_minmax(0,1fr)] gap-x-4"
+						key={experience.id}
+					>
+						<span
+							aria-hidden
+							className="relative z-10 mt-1.5 size-3.5 rounded-full border-2 border-border bg-background"
+						/>
 
-						<div className="flex flex-1 flex-col gap-1.5 pt-1">
+						<div className="flex flex-col gap-1.5">
 							<div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
 								<h3 className="text-balance font-heading font-semibold text-base tracking-tight">
 									{experience.role}
@@ -54,7 +54,7 @@ export function ProfileTimeline({ experiences }: Props) {
 							</p>
 
 							{experience.description && (
-								<p className="mt-2 max-w-prose select-text whitespace-pre-wrap text-pretty text-foreground/70 text-sm/7">
+								<p className="mt-2 max-w-prose whitespace-pre-wrap text-pretty text-foreground/70 text-sm/7">
 									{experience.description}
 								</p>
 							)}

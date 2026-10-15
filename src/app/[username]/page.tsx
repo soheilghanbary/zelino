@@ -89,7 +89,7 @@ export default async function UserPage({ params }: Props) {
 							<>
 								{profile.summary && (
 									<ProfileSection delay={100} id="about" title="About">
-										<p className="max-w-prose select-text whitespace-pre-wrap text-pretty text-base/8 text-muted-foreground">
+										<p className="max-w-prose whitespace-pre-wrap text-pretty text-base/8 text-muted-foreground">
 											{profile.summary}
 										</p>
 									</ProfileSection>
