@@ -54,15 +54,13 @@ export function ProfileHero({ profile }: Props) {
 				</div>
 
 				{profile.openToWork && (
-					<div className="flex justify-center sm:justify-start">
-						<Badge
-							className="h-6 w-fit gap-1.5 border-emerald-600/20 bg-emerald-600/10 px-2 font-medium text-emerald-700 dark:border-emerald-400/25 dark:bg-emerald-400/10 dark:text-emerald-300"
-							variant="outline"
-						>
-							<SparklesIcon aria-hidden />
-							#OpenToWork
-						</Badge>
-					</div>
+					<Badge
+						className="h-6 w-fit gap-1.5 border-emerald-600/20 bg-emerald-600/10 px-2 font-medium text-emerald-700 dark:border-emerald-400/25 dark:bg-emerald-400/10 dark:text-emerald-300"
+						variant="outline"
+					>
+						<SparklesIcon aria-hidden />
+						#OpenToWork
+					</Badge>
 				)}
 			</div>
 
