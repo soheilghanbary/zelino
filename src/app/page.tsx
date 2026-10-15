@@ -3,16 +3,14 @@ import Link from 'next/link'
 import HalftoneReveal from '@/components/HalftoneReveal'
 import { SiteHeader } from '@/components/site-header'
 import { Button } from '@/components/ui/button'
-import { appConfig } from '@/config'
 
 export default function Home() {
 	return (
 		<div className="relative isolate flex min-h-svh flex-col">
 			<SiteHeader />
-
-			<main className="flex flex-1 items-center px-4 py-16 md:px-6 md:py-24">
-				<section className="mx-auto grid w-full max-w-5xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
-					<div className="relative h-100 w-full overflow-hidden rounded-2xl border border-border/60 shadow-foreground/5 shadow-sm dark:shadow-black">
+			<main className="flex flex-1 items-center p-6">
+				<section className="mx-auto grid w-full max-w-5xl items-center gap-8 lg:grid-cols-2 lg:gap-16">
+					<div className="relative h-90 w-full overflow-hidden rounded-2xl border border-border/60 shadow-foreground/5 shadow-sm dark:shadow-black">
 						<HalftoneReveal
 							src="https://images.unsplash.com/photo-1693252258249-5ef8b8b1a0ed?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
 							mode="duotone"
@@ -43,25 +41,14 @@ export default function Home() {
 							Skills, roles, and links in one place. Build a profile that reads
 							like you, not like a template.
 						</p>
-
-						<div className="flex w-full flex-col items-stretch gap-3 motion-safe:animate-blurred-fade-in motion-safe:animate-delay-250 sm:w-auto sm:flex-row">
-							<Button
-								nativeButton={false}
-								render={<Link href="/login" />}
-								size="lg"
-							>
-								Create your page
-								<ArrowRightIcon data-icon="inline-end" />
-							</Button>
-							<Button
-								nativeButton={false}
-								render={<Link href={`/${appConfig.showcaseUsername}`} />}
-								size="lg"
-								variant="outline"
-							>
-								See a live profile
-							</Button>
-						</div>
+						<Button
+							nativeButton={false}
+							render={<Link href="/login" />}
+							size="lg"
+						>
+							Create your page
+							<ArrowRightIcon data-icon="inline-end" />
+						</Button>
 					</div>
 				</section>
 			</main>
