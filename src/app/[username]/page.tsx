@@ -82,7 +82,7 @@ export default async function UserPage({ params }: Props) {
 						</div>
 					</aside>
 
-					<div className="flex flex-col gap-10">
+					<div className="flex min-w-0 flex-col gap-10">
 						{sections.length === 0 ? (
 							<div className="motion-safe:animate-fade-in-up">
 								<ProfileEmptyState />
