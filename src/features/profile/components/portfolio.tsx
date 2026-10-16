@@ -1,5 +1,4 @@
 import { ArrowUpRightIcon } from 'lucide-react'
-import { ScrollFade } from '@/components/scroll-fade'
 import type { PortfoliosValues } from '@/lib/db/parse'
 import { toExternalUrl } from '../lib'
 
@@ -9,7 +8,7 @@ type Props = {
 
 export function ProfilePortfolio({ portfolios }: Props) {
 	return (
-		<ScrollFade className="snap-x snap-mandatory sm:overflow-visible">
+		<div className="scroll-fade-x scrollbar-none scroll-fade-8 snap-x snap-mandatory overflow-x-auto">
 			<ul className="flex snap-x gap-4 pb-2 sm:grid sm:grid-cols-2 sm:gap-6 sm:pb-0">
 				{portfolios.map((item) => {
 					const href = toExternalUrl(item.link)
@@ -54,6 +53,6 @@ export function ProfilePortfolio({ portfolios }: Props) {
 					)
 				})}
 			</ul>
-		</ScrollFade>
+		</div>
 	)
 }
