@@ -67,6 +67,9 @@ export default function Home() {
 							nativeButton={false}
 							render={<Link href="/login" />}
 							size="lg"
+							className={
+								'motion-safe:animate-blurred-fade-in motion-safe:animate-delay-300'
+							}
 						>
 							Create your page <ArrowRightIcon data-icon="inline-end" />
 						</Button>
