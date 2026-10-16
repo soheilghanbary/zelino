@@ -9,8 +9,8 @@ export default function Home() {
 		<div className="relative isolate flex min-h-svh flex-col">
 			<SiteHeader />
 			<main className="flex flex-1 items-center p-6">
-				<section className="mx-auto grid w-full max-w-5xl items-center gap-8 rounded-2xl border bg-card p-3 lg:grid-cols-2 lg:gap-12">
-					<div className="relative h-100 w-full overflow-hidden rounded-xl">
+				<section className="mx-auto grid w-full max-w-5xl items-center gap-0 rounded-2xl border bg-card p-3 lg:grid-cols-2 lg:gap-12">
+					<div className="relative h-80 w-full overflow-hidden rounded-xl lg:h-100">
 						{/* <HalftoneReveal
 							src="https://images.unsplash.com/photo-1693252258249-5ef8b8b1a0ed?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
 							mode="duotone"
