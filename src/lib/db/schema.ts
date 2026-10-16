@@ -22,7 +22,7 @@ export const user = pgTable('user', {
 	skills: jsonb('skills').$type<any[]>().default([]).notNull(),
 	experiences: jsonb('work_experiences').$type<any[]>().default([]).notNull(),
 	portfolios: jsonb('portfolios').$type<any[]>().default([]).notNull(),
-	socialLinks: jsonb('social_links').$type<any[]>().default([]).notNull(),
+	social: jsonb('social').$type<any>().default({}).notNull(),
 	location: text('location').notNull().default(''),
 	phone: text('phone').notNull().default(''),
 	portfolio: text('portfolio_url').notNull().default(''),

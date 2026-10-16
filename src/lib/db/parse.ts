@@ -104,3 +104,30 @@ export function parseSocialLinks(value: unknown): SocialLinksValues {
 	const parsed = z.array(socialLinkSchema).safeParse(value)
 	return parsed.success ? parsed.data : []
 }
+
+export const socialSchema = z.object({
+	github: z.string().trim().default(''),
+	linkedin: z.string().trim().default(''),
+	dribbble: z.string().trim().default(''),
+	instagram: z.string().trim().default(''),
+	x: z.string().trim().default(''),
+	telegram: z.string().trim().default(''),
+	portfolio: z.string().trim().default(''),
+})
+
+export type Social = z.infer<typeof socialSchema>
+
+const defaultSocial: Social = {
+	dribbble: '',
+	github: '',
+	instagram: '',
+	linkedin: '',
+	portfolio: '',
+	telegram: '',
+	x: '',
+}
+
+export function parseSocial(value: unknown): Social {
+	const parsed = socialSchema.safeParse(value)
+	return parsed.success ? parsed.data : defaultSocial
+}

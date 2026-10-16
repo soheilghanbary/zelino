@@ -4,7 +4,6 @@ import { cn } from 'cn'
 import {
 	BriefcaseBusinessIcon,
 	ImageIcon,
-	LinkIcon,
 	SparklesIcon,
 	UserIcon,
 } from 'lucide-react'
@@ -16,7 +15,6 @@ const ICONS = {
 	experience: BriefcaseBusinessIcon,
 	skills: SparklesIcon,
 	portfolio: ImageIcon,
-	social: LinkIcon,
 } satisfies Record<Section['id'], typeof UserIcon>
 
 type Props = {

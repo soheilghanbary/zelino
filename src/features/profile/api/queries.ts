@@ -5,7 +5,7 @@ import {
 	parseExperiences,
 	parsePortfolios,
 	parseSkills,
-	parseSocialLinks,
+	parseSocial,
 } from '@/lib/db/parse'
 import { user } from '@/lib/db/schema'
 import { type Profile, profileSchema } from '../schemas'
@@ -30,7 +30,7 @@ export const getProfile = os
 				skills: user.skills,
 				experiences: user.experiences,
 				portfolios: user.portfolios,
-				socialLinks: user.socialLinks,
+				social: user.social,
 			})
 			.from(user)
 			.where(eq(user.username, input.username))
@@ -53,6 +53,6 @@ export const getProfile = os
 			skills: parseSkills(data.skills),
 			experiences: parseExperiences(data.experiences),
 			portfolios: parsePortfolios(data.portfolios),
-			socialLinks: parseSocialLinks(data.socialLinks),
+			social: parseSocial(data.social),
 		}
 	})

@@ -1,10 +1,6 @@
 import { eq } from 'drizzle-orm'
 import { db } from '@/lib/db'
-import {
-	parseExperiences,
-	parsePortfolios,
-	parseSocialLinks,
-} from '@/lib/db/parse'
+import { parseExperiences, parsePortfolios, parseSocial } from '@/lib/db/parse'
 import { user } from '@/lib/db/schema'
 import { authed } from '@/lib/orpc/context'
 
@@ -57,10 +53,12 @@ export const getPortfolios = authed.handler(async ({ context }) => {
 	return { portfolios: parsePortfolios(data?.portfolios) }
 })
 
-export const getSocialLinks = authed.handler(async ({ context }) => {
+export const getSocial = authed.handler(async ({ context }) => {
 	const [data] = await db
-		.select({ socialLinks: user.socialLinks })
+		.select({
+			social: user.social,
+		})
 		.from(user)
 		.where(eq(user.id, context.userId))
-	return { socialLinks: parseSocialLinks(data?.socialLinks) }
+	return { social: parseSocial(data?.social) }
 })

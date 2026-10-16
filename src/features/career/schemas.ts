@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import {
+	socialSchema as baseSocialSchema,
 	experienceSchema,
 	portfolioSchema,
 	skillSchema,
@@ -79,6 +80,12 @@ export const imageSchema = z.object({
 export type ImageValues = z.infer<typeof imageSchema>
 
 export const SKILLS_MAX = 24
+
+export const socialSchema = baseSocialSchema.extend({
+	portfolio: urlField('portfolio'),
+})
+
+export type SocialValues = z.infer<typeof socialSchema>
 
 export const skillsSchema = z.object({
 	skills: z.array(skillSchema),

@@ -1,12 +1,22 @@
-import { GlobeIcon } from 'lucide-react'
+import { GlobeIcon, SendIcon } from 'lucide-react'
 import type { ComponentType, SVGProps } from 'react'
-import { GithubIcon, LinkedinIcon } from '@/assets/icons'
+import {
+	DribbbleIcon,
+	GithubIcon,
+	InstagramIcon,
+	LinkedinIcon,
+	XIcon,
+} from '@/assets/icons'
 import { Button } from '@/components/ui/button'
 import type { ProfileLink } from '../lib'
 
 const ICONS = {
 	github: GithubIcon,
 	linkedin: LinkedinIcon,
+	dribbble: DribbbleIcon,
+	instagram: InstagramIcon,
+	x: XIcon,
+	telegram: SendIcon,
 	globe: GlobeIcon,
 } satisfies Record<ProfileLink['icon'], ComponentType<SVGProps<SVGSVGElement>>>
 

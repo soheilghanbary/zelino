@@ -7,9 +7,8 @@ export { PortfolioForm } from './components/portfolio-form'
 export { PortfoliosList } from './components/portfolio-list'
 export { PortfoliosSkeleton } from './components/portfolios-skeleton'
 export { SkillsFormSkeleton } from './components/skills-form-skeleton'
-export { SocialLinkForm } from './components/social-link-form'
-export { SocialLinksList } from './components/social-links-list'
-export { SocialLinksSkeleton } from './components/social-links-skeleton'
+export { SocialForm } from './components/social-form'
+export { SocialSkeleton } from './components/social-skeleton'
 export { UploadImage } from './components/upload-image'
 export type {
 	AboutInput,
@@ -23,6 +22,7 @@ export type {
 	SkillsValues,
 	SocialLinkInput,
 	SocialLinksValues,
+	SocialValues,
 } from './schemas'
 export {
 	aboutSchema,
@@ -41,6 +41,7 @@ export {
 	skillsSchema,
 	socialLinkInputSchema,
 	socialLinkSchema,
+	socialSchema,
 	updateExperienceSchema,
 	updatePortfolioSchema,
 	updateSocialLinkSchema,

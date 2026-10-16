@@ -210,15 +210,6 @@ export function PortfolioForm({ portfolio, onSuccess }: Props) {
 										}}
 									/>
 								</div>
-								{field.value && (
-									// eslint-disable-next-line @next/next/no-img-element
-									// biome-ignore lint/performance/noImgElement: user-provided remote image
-									<img
-										alt="Preview"
-										className="mt-2 h-32 w-full rounded-md object-cover"
-										src={field.value}
-									/>
-								)}
 								<FieldError errors={[fieldState.error]} />
 							</Field>
 						)}

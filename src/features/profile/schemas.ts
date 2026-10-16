@@ -3,7 +3,7 @@ import type {
 	ExperiencesValues,
 	PortfoliosValues,
 	Skill,
-	SocialLinksValues,
+	Social,
 } from '@/lib/db/parse'
 
 export const profileSchema = z.object({
@@ -25,5 +25,5 @@ export type Profile = {
 	skills: Skill[]
 	experiences: ExperiencesValues
 	portfolios: PortfoliosValues
-	socialLinks: SocialLinksValues
+	social: Social
 }

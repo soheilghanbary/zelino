@@ -8,7 +8,6 @@ export { ProfileSection } from './components/section'
 export { ProfileSectionNav } from './components/section-nav'
 export { ShareButton } from './components/share-button'
 export { ProfileSkills } from './components/skills'
-export { ProfileSocialLinks } from './components/social-links'
 export { ProfileTimeline } from './components/timeline'
 export type { ProfileLink, ProfileSectionMeta } from './lib'
 export {

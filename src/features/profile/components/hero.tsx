@@ -6,12 +6,8 @@ import {
 	AvatarImage,
 } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import {
-	getProfileLinks,
-	profileInitials,
-	profileName,
-	toExternalUrl,
-} from '../lib'
+import type { ProfileLink } from '../lib'
+import { profileInitials, profileName, toExternalUrl } from '../lib'
 import type { Profile } from '../schemas'
 import { LinkButtons } from './link-buttons'
 import { ShareButton } from './share-button'
@@ -23,17 +19,58 @@ type Props = {
 export function ProfileHero({ profile }: Props) {
 	const name = profileName(profile)
 	const hasMeta = Boolean(profile.location || profile.email || profile.phone)
-	const socialLinks = profile.socialLinks.flatMap((item) => {
-		const href = toExternalUrl(item.link)
-		if (!href) return []
-		const lower = item.title.toLowerCase()
-		const icon: 'github' | 'linkedin' | 'globe' = lower.includes('github')
-			? 'github'
-			: lower.includes('linkedin')
-				? 'linkedin'
-				: 'globe'
-		return [{ href, icon, name: item.title }]
-	})
+	const social = profile.social
+	const socialLinks = [
+		social.github
+			? {
+					href: `https://github.com/${social.github.replace(/^@/, '')}`,
+					icon: 'github' as const,
+					name: 'GitHub',
+				}
+			: null,
+		social.linkedin
+			? {
+					href: `https://linkedin.com/in/${social.linkedin.replace(/^@/, '')}`,
+					icon: 'linkedin' as const,
+					name: 'LinkedIn',
+				}
+			: null,
+		social.dribbble
+			? {
+					href: `https://dribbble.com/${social.dribbble.replace(/^@/, '')}`,
+					icon: 'dribbble' as const,
+					name: 'Dribbble',
+				}
+			: null,
+		social.instagram
+			? {
+					href: `https://instagram.com/${social.instagram.replace(/^@/, '')}`,
+					icon: 'instagram' as const,
+					name: 'Instagram',
+				}
+			: null,
+		social.x
+			? {
+					href: `https://x.com/${social.x.replace(/^@/, '')}`,
+					icon: 'x' as const,
+					name: 'X',
+				}
+			: null,
+		social.telegram
+			? {
+					href: `https://t.me/${social.telegram.replace(/^@/, '')}`,
+					icon: 'telegram' as const,
+					name: 'Telegram',
+				}
+			: null,
+	].filter(Boolean) as ProfileLink[]
+
+	const portfolioUrl = toExternalUrl(social.portfolio || profile.portfolio)
+	const portfolioLink = portfolioUrl
+		? [{ href: portfolioUrl, icon: 'globe' as const, name: 'Website' }]
+		: []
+
+	const links = [...socialLinks, ...portfolioLink]
 
 	return (
 		<div className="flex flex-col gap-6">
@@ -123,7 +160,7 @@ export function ProfileHero({ profile }: Props) {
 			)}
 
 			<div className="flex flex-wrap items-center gap-2">
-				<LinkButtons links={[...getProfileLinks(profile), ...socialLinks]} />
+				<LinkButtons links={links} />
 				<ShareButton name={name} />
 			</div>
 		</div>

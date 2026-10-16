@@ -25,14 +25,14 @@ import {
 	PortfoliosList,
 	PortfoliosSkeleton,
 	SkillsFormSkeleton,
-	SocialLinksList,
-	SocialLinksSkeleton,
+	SocialForm,
+	SocialSkeleton,
 } from '@/features/career'
 import {
 	getExperiences,
 	getPortfolios,
 	getSkills,
-	getSocialLinks,
+	getSocial,
 	getUserAbout,
 	getUserName,
 } from '@/features/career/api/queries'
@@ -60,9 +60,9 @@ export const PortfolioTab = async () => {
 	return <PortfoliosList {...data} />
 }
 
-export const SocialLinksTab = async () => {
-	const data = await call(getSocialLinks)
-	return <SocialLinksList {...data} />
+export const SocialTab = async () => {
+	const data = await call(getSocial)
+	return <SocialForm {...(data?.social ?? {})} />
 }
 
 export const UserNameSection = async () => {
@@ -175,8 +175,8 @@ export default function EditPage() {
 						</Suspense>
 					</TabsContent>
 					<TabsContent value="social">
-						<Suspense fallback={<SocialLinksSkeleton />}>
-							<SocialLinksTab />
+						<Suspense fallback={<SocialSkeleton />}>
+							<SocialTab />
 						</Suspense>
 					</TabsContent>
 					<TabsContent value="skills">
