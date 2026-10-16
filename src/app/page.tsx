@@ -22,26 +22,25 @@ export default function Home() {
 							softness={0.6}
 							linger={1.2}
 						/> */}
-						{/* @ts-ignore */}
 						<CrystalizedBall
-							preset="plasma"
+							preset="solar"
 							color="#1F75EC"
 							size={0.7}
-							crackle={0.85}
-							fill={0.5}
+							crackle={0.7}
+							fill={0.55}
 							interactive
 							hoverStrength={0.7}
 							strands={6}
-							flares={0.65}
-							glow={0.9}
-							sparks={0.6}
+							flares={1}
+							glow={1.1}
+							sparks={0.5}
 							particleCount={15000}
-							motion="rise"
+							motion="orbit"
 							particleShape="square"
 							depth={0.6}
-							sway={0.5}
+							sway={0.7}
 							twinkle={0.5}
-							haze={0.7}
+							haze={0.8}
 							dustSpeed={1}
 							speed={1}
 							intro
