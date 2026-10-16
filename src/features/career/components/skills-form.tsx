@@ -10,8 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { toast } from '@/components/ui/toast'
 import { client } from '@/lib/orpc/client'
-import { type SkillsValues, skillsSchema } from '../schemas'
-
+import { SKILLS_MAX, type SkillsValues, skillsSchema } from '../schemas'
 export function SkillsForm({ skills }: SkillsValues) {
 	const [tags, setTags] = useState<Tag[]>(skills)
 	const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null)
@@ -53,7 +52,7 @@ export function SkillsForm({ skills }: SkillsValues) {
 			<FieldGroup>
 				<Field>
 					<FieldLabel>
-						Your skills {tags.length}/{10}
+						Your skills {tags.length}/{SKILLS_MAX}
 					</FieldLabel>
 					<Controller
 						control={control}

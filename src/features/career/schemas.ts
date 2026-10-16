@@ -79,7 +79,7 @@ export const imageSchema = z.object({
 
 export type ImageValues = z.infer<typeof imageSchema>
 
-export const SKILLS_MAX = 24
+export const SKILLS_MAX = 30
 
 export const socialSchema = baseSocialSchema.extend({
 	portfolio: urlField('portfolio'),
@@ -88,7 +88,7 @@ export const socialSchema = baseSocialSchema.extend({
 export type SocialValues = z.infer<typeof socialSchema>
 
 export const skillsSchema = z.object({
-	skills: z.array(skillSchema),
+	skills: z.array(skillSchema).max(SKILLS_MAX),
 })
 
 export type SkillsValues = z.infer<typeof skillsSchema>
