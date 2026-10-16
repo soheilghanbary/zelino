@@ -1,7 +1,9 @@
 import { call } from '@orpc/server'
 import {
 	BriefcaseIcon,
+	ImageIcon,
 	Link2Icon,
+	LinkIcon,
 	SettingsIcon,
 	UserIcon,
 	ZapIcon,
@@ -20,11 +22,17 @@ import {
 	AboutFormSkeleton,
 	ExperiencesList,
 	ExperiencesSkeleton,
+	PortfoliosList,
+	PortfoliosSkeleton,
 	SkillsFormSkeleton,
+	SocialLinksList,
+	SocialLinksSkeleton,
 } from '@/features/career'
 import {
 	getExperiences,
+	getPortfolios,
 	getSkills,
+	getSocialLinks,
 	getUserAbout,
 	getUserName,
 } from '@/features/career/api/queries'
@@ -45,6 +53,16 @@ export const SkillsTab = async () => {
 export const ExperienceTab = async () => {
 	const data = await call(getExperiences)
 	return <ExperiencesList {...data} />
+}
+
+export const PortfolioTab = async () => {
+	const data = await call(getPortfolios)
+	return <PortfoliosList {...data} />
+}
+
+export const SocialLinksTab = async () => {
+	const data = await call(getSocialLinks)
+	return <SocialLinksList {...data} />
 }
 
 export const UserNameSection = async () => {
@@ -123,6 +141,14 @@ export default function EditPage() {
 								<BriefcaseIcon />
 								Experience
 							</TabsTrigger>
+							<TabsTrigger value="portfolio">
+								<ImageIcon />
+								Portfolio
+							</TabsTrigger>
+							<TabsTrigger value="social">
+								<LinkIcon />
+								Social
+							</TabsTrigger>
 							<TabsTrigger value="skills">
 								<ZapIcon />
 								Skills
@@ -141,6 +167,16 @@ export default function EditPage() {
 					<TabsContent value="experience">
 						<Suspense fallback={<ExperiencesSkeleton />}>
 							<ExperienceTab />
+						</Suspense>
+					</TabsContent>
+					<TabsContent value="portfolio">
+						<Suspense fallback={<PortfoliosSkeleton />}>
+							<PortfolioTab />
+						</Suspense>
+					</TabsContent>
+					<TabsContent value="social">
+						<Suspense fallback={<SocialLinksSkeleton />}>
+							<SocialLinksTab />
 						</Suspense>
 					</TabsContent>
 					<TabsContent value="skills">

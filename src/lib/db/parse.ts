@@ -40,10 +40,51 @@ export const experienceSchema = z.object({
 		),
 })
 
+export const portfolioSchema = z.object({
+	id: z.string().min(1),
+	title: z
+		.string()
+		.trim()
+		.min(1, 'Title is required')
+		.max(120, 'Keep the title under 120 characters'),
+	image: z.string().trim().default(''),
+	description: z
+		.string()
+		.trim()
+		.max(
+			DESCRIPTION_MAX,
+			`Keep the description under ${DESCRIPTION_MAX} characters`
+		)
+		.default(''),
+	link: z
+		.string()
+		.trim()
+		.max(200, 'Keep the link under 200 characters')
+		.default(''),
+})
+
+export const socialLinkSchema = z.object({
+	id: z.string().min(1),
+	title: z
+		.string()
+		.trim()
+		.min(1, 'Title is required')
+		.max(80, 'Keep the title under 80 characters'),
+	link: z
+		.string()
+		.trim()
+		.max(200, 'Keep the link under 200 characters')
+		.default(''),
+})
+
+export type SocialLink = z.infer<typeof socialLinkSchema>
+export type SocialLinksValues = SocialLink[]
+
 export type Skill = z.infer<typeof skillSchema>
 export type Experience = z.infer<typeof experienceSchema>
+export type Portfolio = z.infer<typeof portfolioSchema>
 export type ExperiencesValues = Experience[]
-
+export type PortfoliosValues = Portfolio[]
 export function parseSkills(value: unknown): Skill[] {
 	const parsed = z.array(skillSchema).safeParse(value)
 	return parsed.success ? parsed.data : []
@@ -51,5 +92,15 @@ export function parseSkills(value: unknown): Skill[] {
 
 export function parseExperiences(value: unknown): ExperiencesValues {
 	const parsed = z.array(experienceSchema).safeParse(value)
+	return parsed.success ? parsed.data : []
+}
+
+export function parsePortfolios(value: unknown): PortfoliosValues {
+	const parsed = z.array(portfolioSchema).safeParse(value)
+	return parsed.success ? parsed.data : []
+}
+
+export function parseSocialLinks(value: unknown): SocialLinksValues {
+	const parsed = z.array(socialLinkSchema).safeParse(value)
 	return parsed.success ? parsed.data : []
 }

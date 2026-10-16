@@ -1,6 +1,10 @@
 import { eq } from 'drizzle-orm'
 import { db } from '@/lib/db'
-import { parseExperiences } from '@/lib/db/parse'
+import {
+	parseExperiences,
+	parsePortfolios,
+	parseSocialLinks,
+} from '@/lib/db/parse'
 import { user } from '@/lib/db/schema'
 import { authed } from '@/lib/orpc/context'
 
@@ -14,8 +18,6 @@ export const getUserAbout = authed.handler(async ({ context }) => {
 			summary: user.summary,
 			location: user.location,
 			phone: user.phone,
-			githubUrl: user.githubUrl,
-			linkedinUrl: user.linkedinUrl,
 			openToWork: user.openToWork,
 		})
 		.from(user)
@@ -45,4 +47,20 @@ export const getExperiences = authed.handler(async ({ context }) => {
 		.from(user)
 		.where(eq(user.id, context.userId))
 	return { experiences: parseExperiences(data?.experiences) }
+})
+
+export const getPortfolios = authed.handler(async ({ context }) => {
+	const [data] = await db
+		.select({ portfolios: user.portfolios })
+		.from(user)
+		.where(eq(user.id, context.userId))
+	return { portfolios: parsePortfolios(data?.portfolios) }
+})
+
+export const getSocialLinks = authed.handler(async ({ context }) => {
+	const [data] = await db
+		.select({ socialLinks: user.socialLinks })
+		.from(user)
+		.where(eq(user.id, context.userId))
+	return { socialLinks: parseSocialLinks(data?.socialLinks) }
 })

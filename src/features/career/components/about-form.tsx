@@ -62,8 +62,6 @@ export function AboutForm(props: AboutValues) {
 			summary: data.summary,
 			location: data.location,
 			phone: data.phone,
-			githubUrl: data.githubUrl,
-			linkedinUrl: data.linkedinUrl,
 			openToWork: data.openToWork,
 		})
 	})
@@ -164,46 +162,6 @@ export function AboutForm(props: AboutValues) {
 										inputMode="tel"
 										autoComplete="tel"
 										placeholder="+49 30 123456"
-										aria-invalid={fieldState.invalid}
-										disabled={isSaving}
-									/>
-									<FieldError errors={[fieldState.error]} />
-								</Field>
-							)}
-						/>
-
-						<Controller
-							control={control}
-							name="githubUrl"
-							render={({ field, fieldState }) => (
-								<Field data-invalid={fieldState.invalid}>
-									<FieldLabel htmlFor={field.name}>GitHub</FieldLabel>
-									<Input
-										{...field}
-										id={field.name}
-										type="url"
-										inputMode="url"
-										placeholder="github.com/username"
-										aria-invalid={fieldState.invalid}
-										disabled={isSaving}
-									/>
-									<FieldError errors={[fieldState.error]} />
-								</Field>
-							)}
-						/>
-
-						<Controller
-							control={control}
-							name="linkedinUrl"
-							render={({ field, fieldState }) => (
-								<Field data-invalid={fieldState.invalid}>
-									<FieldLabel htmlFor={field.name}>LinkedIn</FieldLabel>
-									<Input
-										{...field}
-										id={field.name}
-										type="url"
-										inputMode="url"
-										placeholder="linkedin.com/in/username"
 										aria-invalid={fieldState.invalid}
 										disabled={isSaving}
 									/>

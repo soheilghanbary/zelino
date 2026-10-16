@@ -1,7 +1,13 @@
 'use client'
 
 import { cn } from 'cn'
-import { BriefcaseBusinessIcon, SparklesIcon, UserIcon } from 'lucide-react'
+import {
+	BriefcaseBusinessIcon,
+	ImageIcon,
+	LinkIcon,
+	SparklesIcon,
+	UserIcon,
+} from 'lucide-react'
 import { useEffect, useState } from 'react'
 import type { ProfileSectionMeta as Section } from '../lib'
 
@@ -9,6 +15,8 @@ const ICONS = {
 	about: UserIcon,
 	experience: BriefcaseBusinessIcon,
 	skills: SparklesIcon,
+	portfolio: ImageIcon,
+	social: LinkIcon,
 } satisfies Record<Section['id'], typeof UserIcon>
 
 type Props = {

@@ -155,7 +155,7 @@ Drizzle's PostgreSQL schema is defined in `src/lib/db/schema.ts`:
 
 - `user` — Better Auth identity plus portfolio fields (`full_name`,
   `job_title`, `tagline`, `summary`, `skills`, `work_experiences`, `location`,
-  `phone`, `github_url`, `linkedin_url`, `portfolio_url`, `open_to_work`,
+  `phone`, `portfolio_url`, `open_to_work`, `portfolios`, `social_links`,
   `username`).
 - `session`, `account`, `verification` — Better Auth tables, all cascading from
   `user`.

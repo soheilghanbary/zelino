@@ -3,18 +3,30 @@ import { eq } from 'drizzle-orm'
 import { nanoid } from 'nanoid'
 import { z } from 'zod'
 import { db } from '@/lib/db'
-import { parseExperiences } from '@/lib/db/parse'
+import {
+	parseExperiences,
+	parsePortfolios,
+	parseSocialLinks,
+} from '@/lib/db/parse'
 import { user } from '@/lib/db/schema'
 import { authed } from '@/lib/orpc/context'
 import {
 	aboutSchema,
 	addExperienceSchema,
+	addPortfolioSchema,
+	addSocialLinkSchema,
 	deleteAccountSchema,
 	EXPERIENCES_MAX,
 	imageSchema,
+	PORTFOLIOS_MAX,
 	removeExperienceSchema,
+	removePortfolioSchema,
+	removeSocialLinkSchema,
+	SOCIAL_LINKS_MAX,
 	skillsSchema,
 	updateExperienceSchema,
+	updatePortfolioSchema,
+	updateSocialLinkSchema,
 } from '../schemas'
 
 async function readExperiences(userId: string) {
@@ -23,6 +35,22 @@ async function readExperiences(userId: string) {
 		.from(user)
 		.where(eq(user.id, userId))
 	return parseExperiences(row?.experiences)
+}
+
+async function readPortfolios(userId: string) {
+	const [row] = await db
+		.select({ portfolios: user.portfolios })
+		.from(user)
+		.where(eq(user.id, userId))
+	return parsePortfolios(row?.portfolios)
+}
+
+async function readSocialLinks(userId: string) {
+	const [row] = await db
+		.select({ socialLinks: user.socialLinks })
+		.from(user)
+		.where(eq(user.id, userId))
+	return parseSocialLinks(row?.socialLinks)
 }
 
 export const updateAbout = authed
@@ -110,6 +138,99 @@ export const updateExperience = authed
 			.set({ experiences: next })
 			.where(eq(user.id, context.userId))
 		return { msg: 'Experience updated', experience: next[index] }
+	})
+
+export const addPortfolio = authed
+	.input(addPortfolioSchema)
+	.handler(async ({ input, context }) => {
+		const portfolios = await readPortfolios(context.userId)
+		if (portfolios.length >= PORTFOLIOS_MAX) {
+			throw new ORPCError('CONFLICT', {
+				message: `You can list up to ${PORTFOLIOS_MAX} portfolio items`,
+			})
+		}
+		const portfolio = { ...input.portfolio, id: nanoid(8) }
+		await db
+			.update(user)
+			.set({ portfolios: [...portfolios, portfolio] })
+			.where(eq(user.id, context.userId))
+		return { msg: 'Portfolio item added', portfolio }
+	})
+
+export const removePortfolio = authed
+	.input(removePortfolioSchema)
+	.handler(async ({ input, context }) => {
+		const portfolios = await readPortfolios(context.userId)
+		const next = portfolios.filter((item) => item.id !== input.id)
+		if (next.length === portfolios.length)
+			return { msg: 'Portfolio item not found' }
+		await db
+			.update(user)
+			.set({ portfolios: next })
+			.where(eq(user.id, context.userId))
+		return { msg: 'Portfolio item removed' }
+	})
+
+export const updatePortfolio = authed
+	.input(updatePortfolioSchema)
+	.handler(async ({ input, context }) => {
+		const portfolios = await readPortfolios(context.userId)
+		const index = portfolios.findIndex((item) => item.id === input.id)
+		if (index === -1)
+			throw new ORPCError('NOT_FOUND', { message: 'Portfolio item not found' })
+		const next = [...portfolios]
+		next[index] = { ...input.portfolio, id: input.id }
+		await db
+			.update(user)
+			.set({ portfolios: next })
+			.where(eq(user.id, context.userId))
+		return { msg: 'Portfolio item updated', portfolio: next[index] }
+	})
+
+export const addSocialLink = authed
+	.input(addSocialLinkSchema)
+	.handler(async ({ input, context }) => {
+		const links = await readSocialLinks(context.userId)
+		if (links.length >= SOCIAL_LINKS_MAX) {
+			throw new ORPCError('CONFLICT', {
+				message: `You can list up to ${SOCIAL_LINKS_MAX} social links`,
+			})
+		}
+		const socialLink = { ...input.socialLink, id: nanoid(8) }
+		await db
+			.update(user)
+			.set({ socialLinks: [...links, socialLink] })
+			.where(eq(user.id, context.userId))
+		return { msg: 'Social link added', socialLink }
+	})
+
+export const removeSocialLink = authed
+	.input(removeSocialLinkSchema)
+	.handler(async ({ input, context }) => {
+		const links = await readSocialLinks(context.userId)
+		const next = links.filter((item) => item.id !== input.id)
+		if (next.length === links.length) return { msg: 'Social link not found' }
+		await db
+			.update(user)
+			.set({ socialLinks: next })
+			.where(eq(user.id, context.userId))
+		return { msg: 'Social link removed' }
+	})
+
+export const updateSocialLink = authed
+	.input(updateSocialLinkSchema)
+	.handler(async ({ input, context }) => {
+		const links = await readSocialLinks(context.userId)
+		const index = links.findIndex((item) => item.id === input.id)
+		if (index === -1)
+			throw new ORPCError('NOT_FOUND', { message: 'Social link not found' })
+		const next = [...links]
+		next[index] = { ...input.socialLink, id: input.id }
+		await db
+			.update(user)
+			.set({ socialLinks: next })
+			.where(eq(user.id, context.userId))
+		return { msg: 'Social link updated', socialLink: next[index] }
 	})
 
 export const deleteAccount = authed

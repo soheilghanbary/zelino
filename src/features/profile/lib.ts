@@ -8,7 +8,7 @@ import type { Profile } from './schemas'
  */
 
 export type ProfileSectionMeta = {
-	id: 'about' | 'experience' | 'skills'
+	id: 'about' | 'experience' | 'skills' | 'portfolio' | 'social'
 	label: string
 	count?: number
 }
@@ -73,13 +73,27 @@ export function getProfileSections(profile: Profile): ProfileSectionMeta[] {
 		})
 	}
 
+	if (profile.portfolios.length > 0) {
+		sections.push({
+			count: profile.portfolios.length,
+			id: 'portfolio',
+			label: 'Portfolio',
+		})
+	}
+
+	if (profile.socialLinks.length > 0) {
+		sections.push({
+			count: profile.socialLinks.length,
+			id: 'social',
+			label: 'Social',
+		})
+	}
+
 	return sections
 }
 
 export function getProfileLinks(profile: Profile): ProfileLink[] {
 	const sources: { href: string; icon: ProfileLink['icon']; name: string }[] = [
-		{ href: profile.githubUrl, icon: 'github', name: 'GitHub' },
-		{ href: profile.linkedinUrl, icon: 'linkedin', name: 'LinkedIn' },
 		{ href: profile.portfolio, icon: 'globe', name: 'Website' },
 	]
 

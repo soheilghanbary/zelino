@@ -9,9 +9,11 @@ import {
 	ProfileEmptyState,
 	ProfileFooter,
 	ProfileHero,
+	ProfilePortfolio,
 	ProfileSection,
 	ProfileSectionNav,
 	ProfileSkills,
+	ProfileSocialLinks,
 	ProfileTimeline,
 	profileDescription,
 	profileName,
@@ -114,6 +116,28 @@ export default async function UserPage({ params }: Props) {
 										title="Skills"
 									>
 										<ProfileSkills skills={profile.skills} />
+									</ProfileSection>
+								)}
+
+								{profile.portfolios.length > 0 && (
+									<ProfileSection
+										count={profile.portfolios.length}
+										delay={250}
+										id="portfolio"
+										title="Portfolio"
+									>
+										<ProfilePortfolio portfolios={profile.portfolios} />
+									</ProfileSection>
+								)}
+
+								{profile.socialLinks.length > 0 && (
+									<ProfileSection
+										count={profile.socialLinks.length}
+										delay={300}
+										id="social"
+										title="Social"
+									>
+										<ProfileSocialLinks socialLinks={profile.socialLinks} />
 									</ProfileSection>
 								)}
 							</>

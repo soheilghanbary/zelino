@@ -6,7 +6,12 @@ import {
 	AvatarImage,
 } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
-import { getProfileLinks, profileInitials, profileName } from '../lib'
+import {
+	getProfileLinks,
+	profileInitials,
+	profileName,
+	toExternalUrl,
+} from '../lib'
 import type { Profile } from '../schemas'
 import { LinkButtons } from './link-buttons'
 import { ShareButton } from './share-button'
@@ -18,6 +23,17 @@ type Props = {
 export function ProfileHero({ profile }: Props) {
 	const name = profileName(profile)
 	const hasMeta = Boolean(profile.location || profile.email || profile.phone)
+	const socialLinks = profile.socialLinks.flatMap((item) => {
+		const href = toExternalUrl(item.link)
+		if (!href) return []
+		const lower = item.title.toLowerCase()
+		const icon: 'github' | 'linkedin' | 'globe' = lower.includes('github')
+			? 'github'
+			: lower.includes('linkedin')
+				? 'linkedin'
+				: 'globe'
+		return [{ href, icon, name: item.title }]
+	})
 
 	return (
 		<div className="flex flex-col gap-6">
@@ -107,7 +123,7 @@ export function ProfileHero({ profile }: Props) {
 			)}
 
 			<div className="flex flex-wrap items-center gap-2">
-				<LinkButtons links={getProfileLinks(profile)} />
+				<LinkButtons links={[...getProfileLinks(profile), ...socialLinks]} />
 				<ShareButton name={name} />
 			</div>
 		</div>

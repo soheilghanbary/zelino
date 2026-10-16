@@ -1,16 +1,27 @@
 import { z } from 'zod'
-import { experienceSchema, skillSchema } from '@/lib/db/parse'
+import {
+	experienceSchema,
+	portfolioSchema,
+	skillSchema,
+	socialLinkSchema,
+} from '@/lib/db/parse'
 
 export type {
 	Experience,
 	ExperiencesValues,
+	Portfolio as PortfolioItem,
+	PortfoliosValues,
 	Skill,
+	SocialLink as SocialLinkItem,
+	SocialLinksValues,
 } from '@/lib/db/parse'
 export {
 	DESCRIPTION_MAX,
 	experienceSchema,
 	PERIOD_MAX,
+	portfolioSchema,
 	skillSchema,
+	socialLinkSchema,
 } from '@/lib/db/parse'
 
 const urlField = (label: string) =>
@@ -55,8 +66,6 @@ export const aboutSchema = z.object({
 	summary: z.string().trim().max(600, 'Keep your summary under 600 characters'),
 	location: z.string().trim().max(80, 'Keep your location under 80 characters'),
 	phone: phoneField,
-	githubUrl: urlField('GitHub'),
-	linkedinUrl: urlField('LinkedIn'),
 	openToWork: z.boolean(),
 })
 
@@ -102,5 +111,47 @@ export const deleteAccountSchema = z.object({
 	confirm: z.string().trim().min(1, 'Type your username to confirm'),
 })
 
+export const PORTFOLIOS_MAX = 12
+
+export const portfolioInputSchema = portfolioSchema.omit({ id: true }).extend({
+	link: urlField('link'),
+})
+
+export const addPortfolioSchema = z.object({
+	portfolio: portfolioInputSchema,
+})
+
+export const removePortfolioSchema = z.object({
+	id: z.string().min(1),
+})
+
+export const updatePortfolioSchema = z.object({
+	id: z.string().min(1),
+	portfolio: portfolioInputSchema,
+})
+
 export type DeleteAccountInput = z.infer<typeof deleteAccountSchema>
+export const SOCIAL_LINKS_MAX = 20
+
+export const socialLinkInputSchema = socialLinkSchema
+	.omit({ id: true })
+	.extend({
+		link: urlField('link'),
+	})
+
+export const addSocialLinkSchema = z.object({
+	socialLink: socialLinkInputSchema,
+})
+
+export const removeSocialLinkSchema = z.object({
+	id: z.string().min(1),
+})
+
+export const updateSocialLinkSchema = z.object({
+	id: z.string().min(1),
+	socialLink: socialLinkInputSchema,
+})
+
 export type ExperienceInput = z.infer<typeof experienceInputSchema>
+export type PortfolioInput = z.infer<typeof portfolioInputSchema>
+export type SocialLinkInput = z.infer<typeof socialLinkInputSchema>

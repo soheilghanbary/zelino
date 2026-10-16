@@ -1,5 +1,10 @@
 import { z } from 'zod'
-import type { ExperiencesValues, Skill } from '@/lib/db/parse'
+import type {
+	ExperiencesValues,
+	PortfoliosValues,
+	Skill,
+	SocialLinksValues,
+} from '@/lib/db/parse'
 
 export const profileSchema = z.object({
 	username: z.string().trim().min(1),
@@ -15,10 +20,10 @@ export type Profile = {
 	summary: string
 	location: string
 	phone: string
-	githubUrl: string
-	linkedinUrl: string
 	portfolio: string
 	openToWork: boolean
 	skills: Skill[]
 	experiences: ExperiencesValues
+	portfolios: PortfoliosValues
+	socialLinks: SocialLinksValues
 }
