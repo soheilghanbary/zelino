@@ -8,7 +8,7 @@ type Props = {
 
 export function ProfilePortfolio({ portfolios }: Props) {
 	return (
-		<div className="scroll-fade-x scrollbar-none scroll-fade-8 snap-x snap-mandatory overflow-x-auto">
+		<div className="scroll-fade-x scrollbar-none scroll-fade-4 snap-x snap-mandatory overflow-x-auto">
 			<ul className="flex snap-x gap-4 pb-2 sm:grid sm:grid-cols-2 sm:gap-6 sm:pb-0">
 				{portfolios.map((item) => {
 					const href = toExternalUrl(item.link)
