@@ -1,6 +1,6 @@
 import { ArrowRightIcon, GalleryVerticalEndIcon } from 'lucide-react'
 import Link from 'next/link'
-import HalftoneReveal from '@/components/HalftoneReveal'
+import CrystalizedBall from '@/components/CrystalizedBall'
 import { SiteHeader } from '@/components/site-header'
 import { Button } from '@/components/ui/button'
 
@@ -9,9 +9,9 @@ export default function Home() {
 		<div className="relative isolate flex min-h-svh flex-col">
 			<SiteHeader />
 			<main className="flex flex-1 items-center p-6">
-				<section className="mx-auto grid w-full max-w-5xl items-center gap-8 lg:grid-cols-2 lg:gap-16">
-					<div className="relative h-90 w-full overflow-hidden rounded-2xl border border-border/60 shadow-foreground/5 shadow-sm dark:shadow-black">
-						<HalftoneReveal
+				<section className="mx-auto grid w-full max-w-5xl items-center gap-8 rounded-2xl border bg-card p-3 lg:grid-cols-2 lg:gap-12">
+					<div className="relative h-100 w-full overflow-hidden rounded-xl">
+						{/* <HalftoneReveal
 							src="https://images.unsplash.com/photo-1693252258249-5ef8b8b1a0ed?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
 							mode="duotone"
 							shape="dot"
@@ -21,22 +21,45 @@ export default function Home() {
 							revealRadius={160}
 							softness={0.6}
 							linger={1.2}
+						/> */}
+						{/* @ts-ignore */}
+						<CrystalizedBall
+							preset="plasma"
+							color="#1F75EC"
+							size={0.7}
+							crackle={0.85}
+							fill={0.5}
+							interactive
+							hoverStrength={0.7}
+							strands={6}
+							flares={0.65}
+							glow={0.9}
+							sparks={0.6}
+							particleCount={15000}
+							motion="rise"
+							particleShape="square"
+							depth={0.6}
+							sway={0.5}
+							twinkle={0.5}
+							haze={0.7}
+							dustSpeed={1}
+							speed={1}
+							intro
+							paused={false}
 						/>
 					</div>
 
-					<div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
-						<span className="inline-flex items-center gap-2 rounded-full border bg-background/60 px-3.5 py-1.5 font-medium text-muted-foreground text-xs backdrop-blur-sm motion-safe:animate-blurred-fade-in">
+					<div className="mb-2 flex flex-col items-center gap-4 text-center lg:mb-0 lg:items-start lg:text-left">
+						<span className="inline-flex items-center gap-2 rounded-full border bg-background/60 px-4 py-2 font-medium text-muted-foreground text-xs backdrop-blur-sm motion-safe:animate-blurred-fade-in">
 							<GalleryVerticalEndIcon
 								aria-hidden
 								className="size-3.5 text-primary"
 							/>
-							One link for your whole career
+							Make your work speak
 						</span>
-
 						<h1 className="text-balance font-extrabold font-heading text-4xl tracking-tight motion-safe:animate-blurred-fade-in motion-safe:animate-delay-100 md:text-6xl">
-							Your career, in one <span className="text-primary">link.</span>
+							Define Your Career
 						</h1>
-
 						<p className="max-w-lg text-pretty text-base text-muted-foreground motion-safe:animate-blurred-fade-in motion-safe:animate-delay-200 md:text-lg">
 							Skills, roles, and links in one place. Build a profile that reads
 							like you, not like a template.
@@ -46,8 +69,7 @@ export default function Home() {
 							render={<Link href="/login" />}
 							size="lg"
 						>
-							Create your page
-							<ArrowRightIcon data-icon="inline-end" />
+							Create your page <ArrowRightIcon data-icon="inline-end" />
 						</Button>
 					</div>
 				</section>
