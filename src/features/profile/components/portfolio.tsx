@@ -33,7 +33,7 @@ export function ProfilePortfolio({ portfolios }: Props) {
 
 							<div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/20 px-4 text-center opacity-0 backdrop-blur-0 transition-all duration-300 group-hover:bg-black/45 group-hover:opacity-100 group-hover:backdrop-blur-md">
 								{item.description && (
-									<p className="max-w-prose text-pretty text-sm text-white/90">
+									<p className="max-w-prose text-pretty text-sm text-white">
 										{item.description}
 									</p>
 								)}
