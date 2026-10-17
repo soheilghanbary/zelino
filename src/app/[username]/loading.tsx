@@ -42,7 +42,7 @@ export default function Loading() {
 			<span className="sr-only">Loading profile</span>
 
 			<div aria-hidden="true" className="flex flex-col">
-				<header className="sticky top-0 z-50 border-border/60 border-b bg-background/70 backdrop-blur-xl">
+				<header className="sticky top-0 z-50 bg-background/70 backdrop-blur-xl">
 					<div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-3 px-4 md:h-16 md:px-6">
 						<div className="-ms-1.5 flex shrink-0 items-center gap-2 px-1.5 py-1">
 							<Skeleton className="size-7 rounded-lg" />

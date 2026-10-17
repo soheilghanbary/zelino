@@ -117,7 +117,7 @@ export function SiteHeader({ className }: Props) {
 			ref={headerRef}
 			data-hidden={hidden || undefined}
 			className={cn(
-				'sticky top-0 z-50 border-border/60 border-b',
+				'sticky top-0 z-50',
 				'bg-background/70 backdrop-blur-xl',
 				'motion-safe:transition-[translate]',
 				'motion-safe:duration-300 motion-safe:ease-out',
