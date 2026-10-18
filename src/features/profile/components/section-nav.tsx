@@ -81,10 +81,8 @@ export function ProfileSectionNav({ sections }: Props) {
 					<a
 						aria-current={isActive ? 'true' : undefined}
 						className={cn(
-							'group relative flex items-center gap-2.5 rounded-lg px-3 py-2 transition-colors',
-							isActive
-								? 'bg-primary/10 text-primary'
-								: 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'
+							'group relative flex items-center gap-2.5 rounded-lg p-2 transition-colors',
+							isActive ? 'bg-muted/65 text-primary' : 'text-muted-foreground'
 						)}
 						href={`#${section.id}`}
 						key={section.id}

@@ -1,6 +1,7 @@
 import { ArrowRightIcon, GalleryVerticalEndIcon } from 'lucide-react'
 import Link from 'next/link'
 import CrystalizedBall from '@/components/CrystalizedBall'
+import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { Button } from '@/components/ui/button'
 
@@ -76,6 +77,7 @@ export default function Home() {
 					</div>
 				</section>
 			</main>
+			<SiteFooter />
 		</div>
 	)
 }

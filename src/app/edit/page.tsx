@@ -11,6 +11,7 @@ import {
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { ScrollFade } from '@/components/scroll-fade'
+import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -198,6 +199,7 @@ export default function EditPage() {
 					</TabsContent>
 				</Tabs>
 			</main>
+			<SiteFooter />
 		</div>
 	)
 }
