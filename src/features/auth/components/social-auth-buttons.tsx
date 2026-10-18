@@ -25,20 +25,22 @@ export function SocialAuthButtons({
 	const isPending = pendingProvider !== null
 
 	return (
-		<div className={cn('flex flex-col gap-2', className)}>
+		<div className={cn('flex flex-col gap-3', className)}>
 			<Button
 				type="button"
 				variant="outline"
+				size="lg"
 				disabled={disabled ?? isPending}
 				onClick={() => signInWithProvider('google')}
 				aria-busy={pendingProvider === 'google'}
+				className="h-10 w-full gap-2.5"
 			>
 				{pendingProvider === 'google' ? (
 					<Spinner />
 				) : (
 					<GoogleIcon className="size-4" />
 				)}
-				Sign in with Google
+				Continue with Google
 			</Button>
 			{socialError && (
 				<p role="alert" className="text-center text-destructive text-sm">
