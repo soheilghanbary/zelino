@@ -2,7 +2,7 @@
 
 import { Edit3, Link2, LogOutIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -13,7 +13,6 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Spinner } from '@/components/ui/spinner'
 import { signOut } from '@/lib/auth/client'
 
 type Props = {
@@ -25,17 +24,11 @@ type Props = {
 }
 
 export function AuthDropdown({ user, username }: Props) {
-	const [signingOut, setSigningOut] = useState(false)
-
+	const router = useRouter()
 	const handleSignOut = async () => {
-		setSigningOut(true)
-		try {
-			await signOut({
-				callbackURL: '/login',
-			})
-		} finally {
-			setSigningOut(false)
-		}
+		await signOut()
+		router.refresh()
+		router.push('/login')
 	}
 
 	const fallback =
@@ -77,9 +70,9 @@ export function AuthDropdown({ user, username }: Props) {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem disabled={signingOut} onClick={handleSignOut}>
-					{signingOut ? <Spinner /> : <LogOutIcon />}
-					{signingOut ? 'Signing out…' : 'Sign Out'}
+				<DropdownMenuItem onClick={handleSignOut}>
+					<LogOutIcon />
+					Sign Out
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
