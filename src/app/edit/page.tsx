@@ -12,7 +12,6 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import { ScrollFade } from '@/components/scroll-fade'
 import { SiteFooter } from '@/components/site-footer'
-import { SiteHeader } from '@/components/site-header'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -107,7 +106,6 @@ export const DeleteAccountSection = async () => {
 export default function EditPage() {
 	return (
 		<div className="min-h-svh">
-			<SiteHeader />
 			<main className="mx-auto w-full max-w-xl px-4 py-10 md:px-6">
 				<p className="text-muted-foreground text-sm/8">Your portfolio</p>
 				<h1 className="font-heading font-semibold text-2xl tracking-tight">

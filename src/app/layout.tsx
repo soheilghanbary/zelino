@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
 import Providers from '@/components/providers'
+import { SiteHeader } from '@/components/site-header'
 import { Toaster } from '@/components/ui/toast'
 import { appConfig } from '@/config'
 
@@ -25,7 +26,6 @@ export const viewport: Viewport = {
 	colorScheme: 'light',
 	themeColor: 'var(--primary)',
 }
-
 export const metadata: Metadata = {
 	title: {
 		default: appConfig.title,
@@ -41,7 +41,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={`${font.className} ${headingFont.variable} antialiased`}>
-				<Providers>{children}</Providers>
+				<Providers>
+					<SiteHeader />
+					{children}
+				</Providers>
 				<Toaster />
 			</body>
 		</html>

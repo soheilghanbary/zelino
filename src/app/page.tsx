@@ -2,13 +2,11 @@ import { ArrowRightIcon, GalleryVerticalEndIcon } from 'lucide-react'
 import Link from 'next/link'
 import CrystalizedBall from '@/components/CrystalizedBall'
 import { SiteFooter } from '@/components/site-footer'
-import { SiteHeader } from '@/components/site-header'
 import { Button } from '@/components/ui/button'
 
 export default function Home() {
 	return (
 		<div className="relative isolate flex min-h-svh flex-col">
-			<SiteHeader />
 			<main className="flex flex-1 items-center p-6">
 				<section className="mx-auto grid w-full max-w-6xl items-center gap-0 p-3 lg:grid-cols-2">
 					<div className="relative h-80 w-full overflow-hidden rounded-xl lg:h-110">
