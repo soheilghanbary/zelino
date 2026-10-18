@@ -1,7 +1,7 @@
 import { cn } from 'cn'
-import { GalleryVerticalEndIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
+import { Logo } from '@/assets/logo'
 import { AuthMenu } from './auth-menu'
 import { ModeToggle } from './mode-toggle'
 import { SiteHeaderShell } from './site-header-shell'
@@ -30,17 +30,8 @@ export function SiteHeader({ className }: Props) {
 						'focus-visible:ring-[3px] focus-visible:ring-ring/50'
 					)}
 				>
-					<span
-						className={cn(
-							'flex size-7 items-center justify-center rounded-lg',
-							'bg-primary/10 text-primary transition-colors',
-							'group-hover:bg-primary/15'
-						)}
-					>
-						<GalleryVerticalEndIcon aria-hidden="true" className="size-4" />
-					</span>
-
-					<span className="font-heading font-semibold text-sm tracking-tight">
+					<Logo aria-hidden="true" className="size-5" />
+					<span className="font-bold font-heading text-base uppercase tracking-tight">
 						Zelino
 					</span>
 				</Link>

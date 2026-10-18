@@ -11,7 +11,6 @@ import {
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { ScrollFade } from '@/components/scroll-fade'
-import { SiteFooter } from '@/components/site-footer'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -105,99 +104,94 @@ export const DeleteAccountSection = async () => {
 
 export default function EditPage() {
 	return (
-		<div className="min-h-svh">
-			<main className="mx-auto w-full max-w-xl px-4 py-10 md:px-6">
-				<p className="text-muted-foreground text-sm/8">Your portfolio</p>
-				<h1 className="font-heading font-semibold text-2xl tracking-tight">
-					Edit profile
-				</h1>
-				<p className="mt-1 text-muted-foreground text-sm/6">
-					What you type here is exactly what visitors see. Fill in the fields
-					below and save when you're ready — no preview step.
-				</p>
-				<div className="mt-4 flex items-center gap-2">
-					<Suspense
-						fallback={
-							<>
-								<Skeleton className="h-9 w-48" />
-								<Skeleton className="size-9 shrink-0" />
-								<Skeleton className="size-9 shrink-0" />
-							</>
-						}
-					>
-						<UserNameSection />
+		<main className="mx-auto w-full max-w-xl px-4 py-10 md:px-6">
+			<p className="text-muted-foreground text-sm/8">Your portfolio</p>
+			<h1 className="font-heading font-semibold text-2xl tracking-tight">
+				Edit profile
+			</h1>
+			<p className="mt-1 text-muted-foreground text-sm/6">
+				What you type here is exactly what visitors see. Fill in the fields
+				below and save when you're ready — no preview step.
+			</p>
+			<div className="mt-4 flex items-center gap-2">
+				<Suspense
+					fallback={
+						<>
+							<Skeleton className="h-9 w-48" />
+							<Skeleton className="size-9 shrink-0" />
+							<Skeleton className="size-9 shrink-0" />
+						</>
+					}
+				>
+					<UserNameSection />
+				</Suspense>
+			</div>
+			<Separator className="my-4" />
+			<Tabs defaultValue="about">
+				<ScrollFade className="-mx-4 px-4 md:mx-0 md:px-0">
+					<TabsList variant="line">
+						<TabsTrigger value="about">
+							<UserIcon />
+							About
+						</TabsTrigger>
+						<TabsTrigger value="experience">
+							<BriefcaseIcon />
+							Experience
+						</TabsTrigger>
+						<TabsTrigger value="portfolio">
+							<ImageIcon />
+							Portfolio
+						</TabsTrigger>
+						<TabsTrigger value="social">
+							<LinkIcon />
+							Social
+						</TabsTrigger>
+						<TabsTrigger value="skills">
+							<ZapIcon />
+							Skills
+						</TabsTrigger>
+						<TabsTrigger value="settings">
+							<SettingsIcon />
+							Settings
+						</TabsTrigger>
+					</TabsList>
+				</ScrollFade>
+				<TabsContent value="about">
+					<Suspense fallback={<AboutFormSkeleton />}>
+						<AboutTab />
 					</Suspense>
-				</div>
-				<Separator className="my-4" />
-				<Tabs defaultValue="about">
-					<ScrollFade className="-mx-4 px-4 md:mx-0 md:px-0">
-						<TabsList variant="line">
-							<TabsTrigger value="about">
-								<UserIcon />
-								About
-							</TabsTrigger>
-							<TabsTrigger value="experience">
-								<BriefcaseIcon />
-								Experience
-							</TabsTrigger>
-							<TabsTrigger value="portfolio">
-								<ImageIcon />
-								Portfolio
-							</TabsTrigger>
-							<TabsTrigger value="social">
-								<LinkIcon />
-								Social
-							</TabsTrigger>
-							<TabsTrigger value="skills">
-								<ZapIcon />
-								Skills
-							</TabsTrigger>
-							<TabsTrigger value="settings">
-								<SettingsIcon />
-								Settings
-							</TabsTrigger>
-						</TabsList>
-					</ScrollFade>
-					<TabsContent value="about">
-						<Suspense fallback={<AboutFormSkeleton />}>
-							<AboutTab />
-						</Suspense>
-					</TabsContent>
-					<TabsContent value="experience">
-						<Suspense fallback={<ExperiencesSkeleton />}>
-							<ExperienceTab />
-						</Suspense>
-					</TabsContent>
-					<TabsContent value="portfolio">
-						<Suspense fallback={<PortfoliosSkeleton />}>
-							<PortfolioTab />
-						</Suspense>
-					</TabsContent>
-					<TabsContent value="social">
-						<Suspense fallback={<SocialSkeleton />}>
-							<SocialTab />
-						</Suspense>
-					</TabsContent>
-					<TabsContent value="skills">
-						<Suspense fallback={<SkillsFormSkeleton />}>
-							<SkillsTab />
-						</Suspense>
-					</TabsContent>
-					<TabsContent value="settings">
-						<h2 className="font-semibold text-foreground text-lg">
-							Danger zone
-						</h2>
-						<p className="text-muted-foreground text-sm/6">
-							Permanently delete your account, portfolio, and public page. This
-							cannot be undone.
-						</p>
-						<Suspense fallback={<Skeleton className="mt-4 h-9 w-36" />}>
-							<DeleteAccountSection />
-						</Suspense>
-					</TabsContent>
-				</Tabs>
-			</main>
-			<SiteFooter />
-		</div>
+				</TabsContent>
+				<TabsContent value="experience">
+					<Suspense fallback={<ExperiencesSkeleton />}>
+						<ExperienceTab />
+					</Suspense>
+				</TabsContent>
+				<TabsContent value="portfolio">
+					<Suspense fallback={<PortfoliosSkeleton />}>
+						<PortfolioTab />
+					</Suspense>
+				</TabsContent>
+				<TabsContent value="social">
+					<Suspense fallback={<SocialSkeleton />}>
+						<SocialTab />
+					</Suspense>
+				</TabsContent>
+				<TabsContent value="skills">
+					<Suspense fallback={<SkillsFormSkeleton />}>
+						<SkillsTab />
+					</Suspense>
+				</TabsContent>
+				<TabsContent value="settings">
+					<h2 className="font-semibold text-foreground text-lg">Danger zone</h2>
+					<p className="text-muted-foreground text-sm/6">
+						Permanently delete your account, portfolio, and public page. This
+						cannot be undone.
+					</p>
+					<Suspense fallback={<Skeleton className="mt-4 h-9 w-36" />}>
+						<DeleteAccountSection />
+					</Suspense>
+				</TabsContent>
+			</Tabs>
+		</main>
 	)
 }
