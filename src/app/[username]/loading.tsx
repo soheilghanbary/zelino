@@ -40,21 +40,7 @@ export default function Loading() {
 	return (
 		<div aria-busy="true" className="relative isolate min-h-svh" role="status">
 			<span className="sr-only">Loading profile</span>
-
 			<div aria-hidden="true" className="flex flex-col">
-				<header className="sticky top-0 z-50 bg-background/70 backdrop-blur-xl">
-					<div className="mx-auto flex h-14 w-full max-w-5xl items-center gap-3 px-4 md:h-16 md:px-6">
-						<div className="-ms-1.5 flex shrink-0 items-center gap-2 px-1.5 py-1">
-							<Skeleton className="size-7 rounded-lg" />
-							<Skeleton className="h-4 w-14" />
-						</div>
-						<div className="ms-auto flex items-center gap-1">
-							<Skeleton className="size-9" />
-							<Skeleton className="size-9 rounded-full" />
-						</div>
-					</div>
-				</header>
-
 				<main className="mx-auto w-full max-w-5xl p-6 px-4 pb-24">
 					<div className="grid gap-12 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-16">
 						<aside className="flex flex-col gap-8">
