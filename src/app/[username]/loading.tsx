@@ -29,7 +29,6 @@ function SectionSkeleton({
 		>
 			<div className="flex items-center gap-4">
 				<Skeleton className={`h-3 ${labelWidth}`} />
-				<Skeleton className="h-px flex-1" />
 			</div>
 			{children}
 		</div>

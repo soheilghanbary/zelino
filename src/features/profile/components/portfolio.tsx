@@ -14,14 +14,14 @@ export function ProfilePortfolio({ portfolios }: Props) {
 					const href = toExternalUrl(item.link)
 					return (
 						<li
-							className="group relative aspect-4/3 w-[78vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-xl border bg-card shadow-xs sm:w-auto sm:max-w-none sm:shrink"
+							className="group relative aspect-4/3 w-[78vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-md border bg-card shadow-xs sm:w-auto sm:max-w-none sm:shrink"
 							key={item.id}
 						>
 							{/* eslint-disable-next-line @next/next/no-img-element */}
 							{/* biome-ignore lint/performance/noImgElement: user-provided remote image */}
 							<img
 								alt={item.title}
-								className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+								className="absolute inset-0 h-full w-full rounded-[inherit] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
 								src={item.image || '/placeholder.webp'}
 							/>
 
