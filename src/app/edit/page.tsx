@@ -70,16 +70,16 @@ export const UserNameSection = async () => {
 
 	return (
 		<>
-			<div className="flex h-9 min-w-0 items-center gap-2 rounded-lg border bg-muted px-2.5 shadow-xs">
+			<div className="bg-muted flex h-9 min-w-0 items-center gap-2 rounded-lg border px-2.5 shadow-xs">
 				<Link2Icon
 					aria-hidden
-					className="size-3.5 shrink-0 text-muted-foreground"
+					className="text-muted-foreground size-3.5 shrink-0"
 				/>
 				<p className="flex min-w-0 items-baseline text-sm/5" title={url}>
-					<span className="truncate text-muted-foreground">
+					<span className="text-muted-foreground truncate">
 						{appConfig.siteDomain}/
 					</span>
-					<span className="font-medium text-foreground">{username}</span>
+					<span className="text-foreground font-medium">{username}</span>
 				</p>
 			</div>
 			<EditUsername value={username} />
@@ -104,12 +104,12 @@ export const DeleteAccountSection = async () => {
 
 export default function EditPage() {
 	return (
-		<main className="mx-auto w-full max-w-xl px-4 py-10 md:px-6">
+		<main className="mx-auto min-h-screen w-full max-w-xl px-4 py-10 md:px-6">
 			<p className="text-muted-foreground text-sm/8">Your portfolio</p>
-			<h1 className="font-heading font-semibold text-2xl tracking-tight">
+			<h1 className="font-heading text-2xl font-semibold tracking-tight">
 				Edit profile
 			</h1>
-			<p className="mt-1 text-muted-foreground text-sm/6">
+			<p className="text-muted-foreground mt-1 text-sm/6">
 				What you type here is exactly what visitors see. Fill in the fields
 				below and save when you're ready — no preview step.
 			</p>
@@ -182,7 +182,7 @@ export default function EditPage() {
 					</Suspense>
 				</TabsContent>
 				<TabsContent value="settings">
-					<h2 className="font-semibold text-foreground text-lg">Danger zone</h2>
+					<h2 className="text-foreground text-lg font-semibold">Danger zone</h2>
 					<p className="text-muted-foreground text-sm/6">
 						Permanently delete your account, portfolio, and public page. This
 						cannot be undone.

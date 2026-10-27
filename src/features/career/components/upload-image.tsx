@@ -152,15 +152,15 @@ export function UploadImage({ value, onChange, disabled }: UploadImageProps) {
 						aria-valuemax={100}
 						aria-valuemin={0}
 						aria-valuenow={Math.round(progress ?? 0)}
-						className="h-1 w-40 overflow-hidden rounded-full bg-muted"
+						className="bg-muted h-1 w-40 overflow-hidden rounded-full"
 					>
 						<div
-							className="h-full rounded-full bg-primary transition-[width] duration-150"
+							className="bg-primary h-full rounded-full transition-[width] duration-150"
 							style={{ width: `${progress}%` }}
 						/>
 					</div>
 				)}
-				<p className="max-w-xs text-balance text-muted-foreground text-xs/5">
+				<p className="text-muted-foreground max-w-xs text-xs/5 text-balance">
 					Upload a photo of yourself. JPG, PNG, or WebP up to {MAX_IMAGE_LABEL}.
 				</p>
 			</div>

@@ -49,6 +49,42 @@
 	--font-sans: var(--font-sans);
 
 	--container-sm: 500px;
+
+	/* Vertical footprint of the floating header at its tallest (md: pill 4rem
+	   + 1rem gutter). Pages use it for `scroll-mt` and sticky offsets so
+	   anchors clear the pill. */
+	--header-offset: 5rem;
+
+	--animate-rise-in: rise-in 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	--animate-settle-in: settle-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Type and copy: a short lift with the blur that sells the fade — expo-out
+   so it arrives quickly and then rests instead of stopping dead. */
+@keyframes rise-in {
+	from {
+		opacity: 0;
+		filter: blur(6px);
+		transform: translate3d(0, 14px, 0);
+	}
+	to {
+		opacity: 1;
+		filter: blur(0);
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+/* Visuals (preview card, canvas): no blur, which would be a repaint per frame
+   at that size — scale and lift carry the same weight. */
+@keyframes settle-in {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 20px, 0) scale(0.97);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
 }
 
 :root {

@@ -8,13 +8,13 @@ type Props = {
 
 export function ProfilePortfolio({ portfolios }: Props) {
 	return (
-		<div className="scroll-fade-x scrollbar-none scroll-fade-4 snap-x snap-mandatory overflow-x-auto">
+		<div className="scroll-fade-x scroll-fade-4 snap-x snap-mandatory scrollbar-none overflow-x-auto">
 			<ul className="flex snap-x gap-4 pb-2 sm:grid sm:grid-cols-2 sm:gap-6 sm:pb-0">
 				{portfolios.map((item) => {
 					const href = toExternalUrl(item.link)
 					return (
 						<li
-							className="group relative aspect-4/3 w-[78vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-md border bg-card shadow-xs sm:w-auto sm:max-w-none sm:shrink"
+							className="group bg-card relative aspect-4/3 w-[78vw] max-w-sm shrink-0 snap-start overflow-hidden rounded-md border shadow-xs sm:w-auto sm:max-w-none sm:shrink"
 							key={item.id}
 						>
 							{/* eslint-disable-next-line @next/next/no-img-element */}
@@ -26,20 +26,20 @@ export function ProfilePortfolio({ portfolios }: Props) {
 							/>
 
 							<div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 bg-linear-to-t from-black/70 to-transparent p-4">
-								<h3 className="font-heading font-semibold text-base text-white tracking-tight">
+								<h3 className="font-heading text-base font-semibold tracking-tight text-white">
 									{item.title}
 								</h3>
 							</div>
 
-							<div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/20 px-4 text-center opacity-0 backdrop-blur-0 transition-all duration-300 group-hover:bg-black/45 group-hover:opacity-100 group-hover:backdrop-blur-md">
+							<div className="backdrop-blur-0 absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black/20 px-4 text-center opacity-0 transition-all duration-300 group-hover:bg-black/45 group-hover:opacity-100 group-hover:backdrop-blur-md">
 								{item.description && (
-									<p className="max-w-prose text-pretty text-sm text-white">
+									<p className="max-w-prose text-sm text-pretty text-white">
 										{item.description}
 									</p>
 								)}
 								{href && (
 									<a
-										className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-4 py-2 font-medium text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+										className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
 										href={href}
 										rel="noopener noreferrer"
 										target="_blank"

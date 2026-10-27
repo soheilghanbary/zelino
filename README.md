@@ -11,18 +11,18 @@ rendered well.
 
 ## Stack
 
-| Concern | Choice |
-| --- | --- |
-| Framework | [Next.js 16](https://nextjs.org) (App Router, Turbopack, React Compiler) |
-| API | [oRPC](https://orpc.unnoq.com) end-to-end typed router |
-| Auth | [Better Auth](https://better-auth.com) (Google OAuth) |
-| Database | PostgreSQL via [Drizzle ORM](https://orm.drizzle.team) |
-| Data fetching | [TanStack Query](https://tanstack.com/query) + [nuqs](https://nuqs.dev) |
-| UI | [Tailwind CSS v4](https://tailwindcss.com) + [Base UI](https://base-ui.com) (shadcn-style registry) |
-| File uploads | [EdgeStore](https://edgestore.dev) |
-| Validation | [Zod](https://zod.dev) v4 |
-| Lint / format | [Biome](https://biomejs.dev) |
-| Runtime | Bun (or Node.js ≥ 20) |
+| Concern       | Choice                                                                                              |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| Framework     | [Next.js 16](https://nextjs.org) (App Router, Turbopack, React Compiler)                            |
+| API           | [oRPC](https://orpc.unnoq.com) end-to-end typed router                                              |
+| Auth          | [Better Auth](https://better-auth.com) (Google OAuth)                                               |
+| Database      | PostgreSQL via [Drizzle ORM](https://orm.drizzle.team)                                              |
+| Data fetching | [TanStack Query](https://tanstack.com/query) + [nuqs](https://nuqs.dev)                             |
+| UI            | [Tailwind CSS v4](https://tailwindcss.com) + [Base UI](https://base-ui.com) (shadcn-style registry) |
+| File uploads  | [EdgeStore](https://edgestore.dev)                                                                  |
+| Validation    | [Zod](https://zod.dev) v4                                                                           |
+| Lint / format | [Biome](https://biomejs.dev)                                                                        |
+| Runtime       | Bun (or Node.js ≥ 20)                                                                               |
 
 ---
 
@@ -88,18 +88,18 @@ Open <http://localhost:3000>, sign up, and land in the editor.
 
 ## Scripts
 
-| Script | Description |
-| --- | --- |
-| `dev` | Start the dev server |
-| `build` | Production build |
-| `start` | Serve the production build |
-| `typecheck` | `tsc --noEmit` |
-| `lint` | Biome lint |
-| `lint:fix` | Biome check with autofixes |
-| `fmt` | Biome format |
-| `db:gen` | Generate Drizzle migrations from the schema |
-| `db:push` | Push the schema straight to the database |
-| `db:std` | Open Drizzle Studio |
+| Script      | Description                                 |
+| ----------- | ------------------------------------------- |
+| `dev`       | Start the dev server                        |
+| `build`     | Production build                            |
+| `start`     | Serve the production build                  |
+| `typecheck` | `tsc --noEmit`                              |
+| `lint`      | Biome lint                                  |
+| `lint:fix`  | Biome check with autofixes                  |
+| `fmt`       | Biome format                                |
+| `db:gen`    | Generate Drizzle migrations from the schema |
+| `db:push`   | Push the schema straight to the database    |
+| `db:std`    | Open Drizzle Studio                         |
 
 ---
 

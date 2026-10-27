@@ -43,7 +43,7 @@ export function SocialAuthButtons({
 				Continue with Google
 			</Button>
 			{socialError && (
-				<p role="alert" className="text-center text-destructive text-sm">
+				<p role="alert" className="text-destructive text-center text-sm">
 					{socialError}
 				</p>
 			)}

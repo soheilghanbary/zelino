@@ -6,7 +6,7 @@ export function SiteFooter() {
 	return (
 		<footer className="border-t">
 			<div className="mx-auto flex w-full max-w-5xl flex-col items-center justify-between gap-2 px-4 py-2 sm:flex-row">
-				<p className="max-w-md text-balance text-center text-muted-foreground text-xs sm:text-left">
+				<p className="text-muted-foreground max-w-md text-center text-xs text-balance sm:text-left">
 					One link for your whole career.
 				</p>
 				<Button

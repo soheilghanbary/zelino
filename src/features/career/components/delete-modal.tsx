@@ -91,7 +91,7 @@ export function DeleteModal({ username }: Props) {
 
 				<Field data-invalid={Boolean(error)}>
 					<FieldLabel htmlFor={fieldId}>
-						Type <span className="font-medium text-foreground">{username}</span>{' '}
+						Type <span className="text-foreground font-medium">{username}</span>{' '}
 						to confirm
 					</FieldLabel>
 					<Input

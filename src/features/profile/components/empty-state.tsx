@@ -9,7 +9,7 @@ import {
 
 export function ProfileEmptyState() {
 	return (
-		<Empty className="items-start border bg-muted/30 text-start">
+		<Empty className="bg-muted/30 items-start border text-start">
 			<EmptyHeader className="items-start">
 				<EmptyMedia variant="icon">
 					<PenLineIcon aria-hidden />

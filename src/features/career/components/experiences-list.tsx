@@ -216,7 +216,7 @@ export function ExperiencesList({ experiences }: Props) {
 								{experience.period}
 							</p>
 							{experience.description && (
-								<p className="whitespace-pre-wrap text-sm/6">
+								<p className="text-sm/6 whitespace-pre-wrap">
 									{experience.description}
 								</p>
 							)}

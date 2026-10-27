@@ -7,12 +7,12 @@ type Props = {
 
 export function ProfileFooter({ name }: Props) {
 	return (
-		<footer className="mt-12 flex flex-col items-center gap-2 border-t pt-6 text-center text-muted-foreground text-xs sm:flex-row sm:items-center sm:justify-between sm:text-left">
+		<footer className="text-muted-foreground mt-12 flex flex-col items-center gap-2 border-t pt-6 text-center text-xs sm:flex-row sm:items-center sm:justify-between sm:text-left">
 			<p>
 				© {new Date().getUTCFullYear()} {name}
 			</p>
 			<Link
-				className="inline-flex items-center gap-1.5 rounded-md transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+				className="hover:text-foreground focus-visible:ring-ring/50 inline-flex items-center gap-1.5 rounded-md transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
 				href="/"
 			>
 				<GalleryVerticalEndIcon aria-hidden className="size-3.5" />

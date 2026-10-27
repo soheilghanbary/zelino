@@ -14,19 +14,19 @@ export function LoginForm({ callbackURL, className }: LoginFormProps) {
 	return (
 		<div
 			className={cn(
-				'mx-auto flex w-full max-w-sm flex-col gap-8 rounded-2xl border bg-card/60 p-8 shadow-sm backdrop-blur',
+				'bg-card/60 mx-auto flex w-full max-w-sm flex-col gap-8 rounded-2xl border p-8 shadow-sm backdrop-blur',
 				className
 			)}
 		>
 			<div className="flex flex-col items-center gap-4 text-center">
-				<div className="flex size-11 items-center justify-center rounded-xl border bg-background shadow-xs">
-					<Logo className="size-5 text-foreground" aria-hidden="true" />
+				<div className="bg-background flex size-11 items-center justify-center rounded-xl border shadow-xs">
+					<Logo className="text-foreground size-5" aria-hidden="true" />
 				</div>
 				<div className="space-y-1.5">
-					<h1 className="font-heading font-semibold text-2xl tracking-tight">
+					<h1 className="font-heading text-2xl font-semibold tracking-tight">
 						Welcome to Zelino
 					</h1>
-					<p className="text-balance text-muted-foreground text-sm">
+					<p className="text-muted-foreground text-sm text-balance">
 						Sign in to manage your career page.
 					</p>
 				</div>
@@ -36,7 +36,7 @@ export function LoginForm({ callbackURL, className }: LoginFormProps) {
 				<SocialAuthButtons callbackURL={callbackURL} />
 			</FieldGroup>
 
-			<p className="text-center text-muted-foreground text-xs leading-relaxed">
+			<p className="text-muted-foreground text-center text-xs leading-relaxed">
 				By continuing, you agree to our Terms of Service and Privacy Policy.
 			</p>
 		</div>

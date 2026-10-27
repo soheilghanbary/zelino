@@ -229,7 +229,7 @@ export function PortfoliosList({ portfolios }: Props) {
 								</div>
 							</ItemHeader>
 							{item.description && (
-								<p className="whitespace-pre-wrap text-muted-foreground text-sm/6">
+								<p className="text-muted-foreground text-sm/6 whitespace-pre-wrap">
 									{item.description}
 								</p>
 							)}

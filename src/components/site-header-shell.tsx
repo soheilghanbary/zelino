@@ -86,12 +86,13 @@ export function SiteHeaderShell({ children }: { children: ReactNode }) {
 			ref={headerRef}
 			data-hidden={hidden || undefined}
 			className={cn(
-				'sticky top-0 z-50',
-				'bg-background/70 backdrop-blur-xl',
+				// The shell spans the viewport but only the pill inside it is
+				// interactive, so the transparent gutter never eats clicks.
+				'pointer-events-none sticky top-0 z-50 px-4 pt-3 md:px-6 md:pt-4',
 				'motion-safe:transition-[translate]',
 				'motion-safe:duration-300 motion-safe:ease-out',
 				'motion-reduce:transition-none',
-				hidden ? '-translate-y-full' : 'translate-y-0'
+				hidden ? '-translate-y-[calc(100%+1rem)]' : 'translate-y-0'
 			)}
 		>
 			{children}

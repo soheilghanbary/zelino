@@ -40,15 +40,7 @@
 				"noAssignInExpressions": "off"
 			},
 			"nursery": {
-				"preset": "recommended",
-				"useSortedClasses": {
-					"fix": "safe",
-					"level": "warn",
-					"options": {
-						"attributes": ["classList"],
-						"functions": ["clsx", "cva", "tv"]
-					}
-				}
+				"useTailwindSortedClasses": "error"
 			},
 			"performance": {
 				"preset": "recommended"

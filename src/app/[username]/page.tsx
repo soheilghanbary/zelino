@@ -66,10 +66,10 @@ export default async function UserPage({ params }: Props) {
 	const sections = getProfileSections(profile)
 
 	return (
-		<div className="relative isolate min-h-svh bg-background">
+		<div className="bg-background relative isolate min-h-svh">
 			<main className="mx-auto w-full max-w-5xl p-6 px-4 pb-24">
 				<div className="grid gap-12 lg:grid-cols-[19rem_minmax(0,1fr)] lg:gap-16">
-					<aside className="flex flex-col gap-8 lg:sticky lg:top-24 lg:self-start">
+					<aside className="flex flex-col gap-8 lg:sticky lg:top-[calc(var(--header-offset)+1.5rem)] lg:self-start">
 						<div className="motion-safe:animate-fade-in-up">
 							<ProfileHero profile={profile} />
 						</div>
@@ -87,7 +87,7 @@ export default async function UserPage({ params }: Props) {
 							<>
 								{profile.summary && (
 									<ProfileSection delay={100} id="about" title="About">
-										<p className="max-w-prose whitespace-pre-wrap text-pretty text-base/8 text-muted-foreground">
+										<p className="text-muted-foreground max-w-prose text-base/8 text-pretty whitespace-pre-wrap">
 											{profile.summary}
 										</p>
 									</ProfileSection>

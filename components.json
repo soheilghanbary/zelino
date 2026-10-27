@@ -22,6 +22,8 @@
 	"menuColor": "default",
 	"menuAccent": "subtle",
 	"registries": {
-		"@react-bits": "https://reactbits.dev/r/{name}.json"
+		"@react-bits": "https://reactbits.dev/r/{name}.json",
+		"@grootstudio": "https://grootstudio.vercel.app/r/{name}.json",
+		"@componentry": "https://componentry.fun/r/{name}.json"
 	}
 }

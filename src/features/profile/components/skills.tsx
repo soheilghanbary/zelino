@@ -11,7 +11,7 @@ export function ProfileSkills({ skills }: Props) {
 			{skills.map((skill) => (
 				<li key={skill.id}>
 					<Badge
-						className="h-7 gap-1.5 bg-card px-3 font-medium text-foreground/85 shadow-xs transition-colors hover:border-primary/40 hover:bg-primary/5 hover:text-foreground"
+						className="bg-card text-foreground/85 hover:border-primary/40 hover:bg-primary/5 hover:text-foreground h-7 gap-1.5 px-3 font-medium shadow-xs transition-colors"
 						variant="outline"
 					>
 						{skill.text}

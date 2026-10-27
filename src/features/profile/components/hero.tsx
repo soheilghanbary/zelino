@@ -75,11 +75,11 @@ export function ProfileHero({ profile }: Props) {
 	return (
 		<div className="flex flex-col gap-6">
 			<div className="flex flex-col gap-5">
-				<Avatar className="size-24 rounded-full ring-1 ring-border sm:size-28">
+				<Avatar className="ring-border size-24 rounded-full ring-1 sm:size-28">
 					{profile.image ? (
 						<AvatarImage alt={name} src={profile.image} />
 					) : (
-						<AvatarFallback className="bg-primary/10 font-heading font-semibold text-2xl text-primary">
+						<AvatarFallback className="bg-primary/10 font-heading text-primary text-2xl font-semibold">
 							{profileInitials(profile)}
 						</AvatarFallback>
 					)}
@@ -89,18 +89,18 @@ export function ProfileHero({ profile }: Props) {
 				</Avatar>
 
 				<div className="flex flex-col gap-2">
-					<h1 className="text-balance font-bold font-heading text-3xl tracking-tight">
+					<h1 className="font-heading text-3xl font-bold tracking-tight text-balance">
 						{name}
 					</h1>
 
 					{profile.title && (
-						<p className="text-pretty font-medium text-base/6 text-primary">
+						<p className="text-primary text-base/6 font-medium text-pretty">
 							{profile.title}
 						</p>
 					)}
 
 					{profile.tagline && (
-						<p className="max-w-prose text-pretty text-muted-foreground text-sm/6">
+						<p className="text-muted-foreground max-w-prose text-sm/6 text-pretty">
 							{profile.tagline}
 						</p>
 					)}
@@ -118,7 +118,7 @@ export function ProfileHero({ profile }: Props) {
 			</div>
 
 			{hasMeta && (
-				<ul className="flex flex-col gap-2 text-foreground/85 text-sm/6">
+				<ul className="text-foreground/85 flex flex-col gap-2 text-sm/6">
 					{profile.location && (
 						<li className="flex items-center gap-2">
 							<MapPinIcon
@@ -131,7 +131,7 @@ export function ProfileHero({ profile }: Props) {
 					{profile.email && (
 						<li>
 							<a
-								className="flex w-fit max-w-full items-center gap-2 rounded-md transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+								className="hover:text-foreground focus-visible:ring-ring/50 flex w-fit max-w-full items-center gap-2 rounded-md transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
 								href={`mailto:${profile.email}`}
 							>
 								<MailIcon
@@ -145,7 +145,7 @@ export function ProfileHero({ profile }: Props) {
 					{profile.phone && (
 						<li>
 							<a
-								className="flex w-fit max-w-full items-center gap-2 rounded-md transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+								className="hover:text-foreground focus-visible:ring-ring/50 flex w-fit max-w-full items-center gap-2 rounded-md transition-colors focus-visible:ring-[3px] focus-visible:outline-none"
 								href={`tel:${profile.phone.replace(/[^\d+]/g, '')}`}
 							>
 								<PhoneIcon

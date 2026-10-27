@@ -41,7 +41,7 @@ function Toast({ className, ...props }: ToastPrimitive.Root.Props) {
 		<ToastPrimitive.Root
 			data-slot="toast"
 			className={cn(
-				'group/toast pointer-events-auto absolute end-0 bottom-0 z-[calc(1000-var(--toast-index))] w-full origin-bottom select-none rounded-2xl border bg-popover text-popover-foreground shadow-lg outline-none will-change-transform focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50',
+				'group/toast bg-popover text-popover-foreground focus-visible:border-ring focus-visible:ring-ring/50 pointer-events-auto absolute end-0 bottom-0 z-[calc(1000-var(--toast-index))] w-full origin-bottom rounded-2xl border shadow-lg will-change-transform outline-none select-none focus-visible:ring-[3px]',
 				'[--gap:0.75rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]',
 				'h-(--height) [transform:translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))] [transition:transform_500ms_cubic-bezier(0.22,1,0.36,1),opacity_500ms,height_150ms]',
 				"after:absolute after:start-0 after:top-full after:h-[calc(var(--gap)+1px)] after:w-full after:content-['']",
@@ -80,7 +80,7 @@ function ToastTitle({ className, ...props }: ToastPrimitive.Title.Props) {
 	return (
 		<ToastPrimitive.Title
 			data-slot="toast-title"
-			className={cn('font-medium text-sm', className)}
+			className={cn('text-sm font-medium', className)}
 			{...props}
 		/>
 	)
@@ -126,7 +126,7 @@ function ToastClose({
 			aria-label="Close toast"
 			render={render}
 			className={cn(
-				"relative shrink-0 text-muted-foreground after:absolute after:-inset-2 after:content-[''] hover:text-foreground",
+				"text-muted-foreground hover:text-foreground relative shrink-0 after:absolute after:-inset-2 after:content-['']",
 				className
 			)}
 			{...props}
@@ -166,7 +166,7 @@ function ToastIcon({ type }: { type: string | undefined }) {
 	return (
 		<span
 			data-slot="toast-icon"
-			className="shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none"
+			className="shrink-0 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4"
 		>
 			{icon}
 		</span>
