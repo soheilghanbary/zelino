@@ -26,14 +26,6 @@ const steps = [
 export default function Home() {
 	return (
 		<main className="relative isolate overflow-hidden">
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-168 overflow-hidden"
-			>
-				<div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,color-mix(in_oklch,var(--primary)_7%,transparent),transparent)]" />
-				<div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_60%,transparent_100%)] bg-size-[64px_64px] opacity-[0.13]" />
-			</div>
-
 			{/* Hero */}
 			<section className="mx-auto grid w-full max-w-6xl items-center gap-16 px-4 pt-14 pb-20 md:px-6 md:pt-20 md:pb-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
 				<div className="flex flex-col items-start gap-6">
