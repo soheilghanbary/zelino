@@ -2,7 +2,6 @@ import { ArrowRightIcon, ArrowUpRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import { GithubIcon } from '@/assets/icons'
 import { Logo } from '@/assets/logo'
-import { CrystalShowcase } from '@/components/landing/crystal-showcase'
 import { ProfilePreview } from '@/components/landing/profile-preview'
 import { Button } from '@/components/ui/button'
 import { CursorDrivenParticleTypography } from '@/components/ui/cursor-driven-particle-typography'
@@ -137,61 +136,50 @@ export default function Home() {
 
 			{/* Closing */}
 			<section className="mx-auto w-full max-w-6xl">
-				<div className="relative isolate overflow-hidden">
-					<div className="grid items-center gap-4 lg:grid-cols-[minmax(0,1fr)_36rem] lg:px-6">
-						<div
-							className="motion-safe:animate-settle-in relative h-100 w-full overflow-hidden"
-							style={{ animationDelay: '80ms' }}
+				<div className="flex flex-col items-center text-center">
+					<Logo
+						aria-hidden
+						className="motion-safe:animate-rise-in size-6 opacity-70"
+						style={{ animationDelay: '160ms' }}
+					/>
+					<h2
+						className="font-heading motion-safe:animate-rise-in mt-4 text-3xl font-extrabold tracking-tight text-balance md:text-4xl"
+						style={{ animationDelay: '240ms' }}
+					>
+						Ready when you are.
+					</h2>
+					<p
+						className="text-muted-foreground motion-safe:animate-rise-in mt-3 max-w-sm text-sm/6 text-pretty"
+						style={{ animationDelay: '320ms' }}
+					>
+						Your page takes a few minutes to set up and no time at all to keep.
+					</p>
+					<div
+						className="motion-safe:animate-rise-in mt-8 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
+						style={{ animationDelay: '400ms' }}
+					>
+						<Button
+							className="h-10 gap-2 rounded-full px-5"
+							nativeButton={false}
+							render={<Link href="/login" />}
 						>
-							<CrystalShowcase />
-						</div>
-						<div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-							<Logo
-								aria-hidden
-								className="motion-safe:animate-rise-in size-6 opacity-70"
-								style={{ animationDelay: '160ms' }}
-							/>
-							<h2
-								className="font-heading motion-safe:animate-rise-in mt-4 text-3xl font-extrabold tracking-tight text-balance md:text-4xl"
-								style={{ animationDelay: '240ms' }}
-							>
-								Ready when you are.
-							</h2>
-							<p
-								className="text-muted-foreground motion-safe:animate-rise-in mt-3 max-w-sm text-sm/6 text-pretty"
-								style={{ animationDelay: '320ms' }}
-							>
-								Your page takes a few minutes to set up and no time at all to
-								keep.
-							</p>
-							<div
-								className="motion-safe:animate-rise-in mt-8 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
-								style={{ animationDelay: '400ms' }}
-							>
-								<Button
-									className="h-10 gap-2 rounded-full px-5"
-									nativeButton={false}
-									render={<Link href="/login" />}
-								>
-									Create your page <ArrowRightIcon data-icon="inline-end" />
-								</Button>
-								<Button
-									className="text-muted-foreground h-10 gap-1.5 rounded-full px-4"
-									nativeButton={false}
-									render={
-										<a
-											href={appConfig.repoUrl}
-											rel="noreferrer noopener"
-											target="_blank"
-										/>
-									}
-									variant="ghost"
-								>
-									<GithubIcon />
-									View source
-								</Button>
-							</div>
-						</div>
+							Create your page <ArrowRightIcon data-icon="inline-end" />
+						</Button>
+						<Button
+							className="text-muted-foreground h-10 gap-1.5 rounded-full px-4"
+							nativeButton={false}
+							render={
+								<a
+									href={appConfig.repoUrl}
+									rel="noreferrer noopener"
+									target="_blank"
+								/>
+							}
+							variant="ghost"
+						>
+							<GithubIcon />
+							View source
+						</Button>
 					</div>
 				</div>
 				<div className="flex h-60 w-full items-center justify-center">
