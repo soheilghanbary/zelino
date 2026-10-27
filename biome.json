@@ -40,7 +40,10 @@
 				"noAssignInExpressions": "off"
 			},
 			"nursery": {
-				"useTailwindSortedClasses": "error"
+				"useTailwindSortedClasses": {
+					"fix": "safe",
+					"level": "error"
+				}
 			},
 			"performance": {
 				"preset": "recommended"
