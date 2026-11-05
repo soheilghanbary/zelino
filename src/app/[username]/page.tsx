@@ -17,14 +17,12 @@ import {
 	profileName,
 } from '@/features/profile'
 
+export const instant = false
+
 type Props = {
 	params: Promise<{ username: string }>
 }
 
-/**
- * `generateMetadata` and the page both need the same row; `cache` collapses
- * them into a single query per request.
- */
 const loadProfile = cache(async (username: string) =>
 	call(getProfile, { username })
 )

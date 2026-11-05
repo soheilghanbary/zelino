@@ -9,9 +9,9 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
+		"dev": "bun --bun next dev",
+		"build": "bun --bun next build",
+		"start": "bun --bun next start",
 		"db:gen": "drizzle-kit generate",
 		"db:push": "drizzle-kit push",
 		"db:std": "drizzle-kit studio",
